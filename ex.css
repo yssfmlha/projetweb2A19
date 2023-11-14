@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+html{
+    scroll-behavior: smooth;
+}
+*{
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+header.sticky{
+    padding: 15px 100px ;
+    background: #2E3239;
+}
+.logo{
+    font-size: 2em;
+    color: #fff;
+    user-select: none;
+}
+.navigation{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navigation a {
+    position: relative;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #fff;
+    font-weight: 500px ;
+    text-decoration: none;
+    margin-left: 40px;
+    padding: 6px 15px;
+}
+.navigation a::before{
+    content:"";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: 0.6s;
+}
+.navigation a:hover::before
+{
+    width: 100%;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('Images/BG.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.container{
+   margin-top: 50px;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;    
+}
+.item-container {
+    position: relative;
+    margin: 24px;
+    width: 320px;
+    height: 570px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 30px 5px #000000;
+    cursor: pointer;
+}
+.img-container,
+.body-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.img-container img{
+    width: 100%;
+    height: 70%;
+}
+.body-container{
+    position: relative;
+}
+.overlay{
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background-color: #26292b;
+    opacity: 0;
+    transition: height 0.4s , opacity  0.2s;
+}
+.item-container:hover .overlay{
+    opacity: 1;
+    height: 150px;
+}
+.event-info{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+.titre,
+.prix{
+    color: #18537a;
+    font-size:1.5em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 12px;
+}
+.info{
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+.separation{
+    width: 20%;
+    height: 6px;
+    background-color: #17537a;
+    margin-bottom:16px ;
+}
+.autre-info{
+    border-top:1px solid #bbb ;
+    margin-top: 12px;
+    padding: 18px;
+    padding-bottom: 0;
+}
+.autre-info info{
+    font-size: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.info i {
+    color: #18537a;
+    font-size: 1.1em;
+    margin-right: 4px;
+}
+.info_description span{
+    color: #18537a;
+    font-weight: bolder;
+}
+.action{
+    font-weight: bold;
+    font-size: 1.3em;
+    letter-spacing: 2px;
+    color: #fff;
+    border: 3px solid #fff;
+    background-color: transparent;
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    cursor: pointer;
+    padding: 12px;
+    transition: background-color 0.4s , top 0.4s;
+}
+.item-container:hover .action{
+    top: 50px;
+}
+.action:hover {
+    background-color: rgba(255, 255,255, 0.2);
+}
+.About-area , .Service-area , .Contact-area{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    height: 700px;
+}
+.text-part{
+    width: 65%;
+    height: 80%;
+}
+h1{
+    font-size: 50px;
+    font-family:Audiowide;
+}
+p{
+    font-size: 24px;
+    line-height: 50px;
+}
+.About-area, .Contact-area {
+    background: #fefefe;
+}
+.Service-area{
+    background: #262626;
+    color: #fff;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.payment{
+    background: #f8f8f8;
+    max-width: 360px;
+    margin: 80px auto;
+    height: auto;
+    padding: 35px;
+    padding-top: 70px;
+    border-radius: 5px;
+    position: absolute;
+    align-items: center;
+    flex-wrap: wrap;  
+    justify-content: center;  
+    transform: translate(-50% , -220%);
+    z-index: -1;
+  }
+  
+  .payment h2{
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: #0d3c61;
+  }
+  
+  .form .label{
+    display: block;
+    color: #555555;
+    margin-bottom: 6px;
+  }
+  
+  .input{
+    padding: 13px 0px 13px 25px;
+    width: 100%;
+    text-align: center;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    word-spacing: 3px;
+    outline: none;
+    font-size: 16px;
+    color: #555555;
+  }
+  
+  .card-grp{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-item{
+    width: 48%;
+  }
+  
+  .space{
+    margin-bottom: 20px;
+  }
+  
+  .icon-relative{
+    position: relative;
+  }
+  
+  .icon-relative .fas,
+  .icon-relative .far{
+    position: absolute;
+    bottom: 12px;
+    left: 15px;
+    font-size: 20px;
+    color: #555555;
+  }
+  
+  .btn{
+    margin-top: 40px;
+    background: #2196F3;
+    padding: 12px;
+    text-align: center;
+    color: #f8f8f8;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  
+  .payment-logo{
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    background: #f8f8f8;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    text-align: center;
+    line-height: 85px;
+  }
+  
+  .payment-logo:before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    height: 90px;
+    background: #2196F3;
+    border-radius: 50%;
+  }
+  
+  .payment-logo p{
+    position: relative;
+    color: #f8f8f8;
+    font-family: 'Baloo Bhaijaan', cursive;
+    font-size: 58px;
+  }
+  
+  
+  @media screen and (max-width: 420px){
+    .card-grp{
+      flex-direction: column;
+    }
+    .card-item{
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .btn{
+      margin-top: 20px;
+    }
+  }
