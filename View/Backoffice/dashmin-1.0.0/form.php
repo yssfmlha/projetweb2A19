@@ -1,11 +1,20 @@
 <?php
-    include "../../../Controller/DonC.php";
-    $c=new DonC();
-    $tab=$c->listdon();
+    include "../../../Controller/ChariteC.php";
+    include "../../../Model/Charite.php";
+    $ChariteC=new ChariteC();
+    if(isset($_POST["name"])&&isset($_POST["founder"])&&isset($_POST["email"])&&isset($_POST["number"])&&isset($_POST["desc"])){
+        if(!empty($_POST["name"])&&!empty($_POST["founder"])&&!empty($_POST["email"])&&!empty($_POST["number"])&&!empty($_POST["desc"])){
+            $Charite=new Charite($_POST["name"],$_POST["founder"],$_POST["email"],$_POST["number"],$_POST["desc"]);
+            $ChariteC->addCharite($Charite);
+            header('Location:table.php');
+        }
+    }
+    else{
+        echo("Missing Information");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -51,7 +60,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>I Need</h3>
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>i Need</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -74,8 +83,8 @@
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Donations</a>
+                    <a href="form.php" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                    <a href="table.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -148,7 +157,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-bell me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Notification</span>
+                            <span class="d-none d-lg-inline-flex">Notificatin</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
@@ -172,7 +181,7 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Youssef Malouhia</span>
+                            <span class="d-none d-lg-inline-flex">Youssef Mlaouhia</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -185,42 +194,46 @@
             <!-- Navbar End -->
 
 
-            <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4">
+            <!-- Form Start -->
+            <div class="container-fluid pt-4 px-4" style="position:relative;left:240px;">
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4" style="width: 1000px;">
-                            <h6 class="mb-4">Donations</h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Deletion</th>
-                                        <th scope="col">id</th>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Message</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                        foreach($tab as $don){
-                                            echo("             
-                                         <tr>
-                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
-                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
-                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
-                                            <td>".$don['amount']."</td>
-                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
-                                        </tr>");
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Add a charity</h6>
+                        <form method="POST" onsubmit="return control()">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="name" placeholder="" name="name" onkeyup="charitynamecontrol()">
+                                <p style="position: relative;left: 490px; top: -50px;height: 0px;" id="namecontrol"></p>
+                                <label for="floatingInput">Charity Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="founder" placeholder="Password" name="founder" onkeyup="foundercontrol()">
+                                <p style="position: relative;left: 490px; top: -60px;height: 0px;" id="foundercontrol"></p>
+                                <label for="floatingPassword">Founder</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="email" placeholder="Password" name="email" onkeyup="emailcontrol()">
+                                <p style="position: relative;left: 490px; top: -45px;height: 0px;" id="emailcontrol"></p>
+                                <label for="floatingPassword">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="number" placeholder="Password" name="number" onkeyup="numbercontrol()">
+                                <p style="position: relative;left: 490px; top: -50px;height: 0px;" id="numbercontrol"></p>
+                                <label for="floatingPassword">Telephone Number</label>
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="desc" style="height: 150px;" name="desc" onkeyup="desccontrol()"></textarea>
+                                <p style="position: relative;left: 490px; top: -100px;height: 0px;" id="desccontrol"></p>
+                                <label for="floatingTextarea">Description</label>
+                            </div>
+                            &nbsp
+                            <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Add</button>
+                        </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Table End -->
+            <!-- Form End -->
 
 
             <!-- Footer Start -->
@@ -229,8 +242,6 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
                             &copy; <a href="#">i Need</a>, All Right Reserved. 
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
                         </div>
                     </div>
                 </div>
@@ -254,8 +265,10 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/controlsaisie.js"></script>
 </body>
 
 </html>

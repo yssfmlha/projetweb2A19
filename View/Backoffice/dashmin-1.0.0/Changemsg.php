@@ -1,11 +1,26 @@
 <?php
-    include "../../../Controller/DonC.php";
-    $c=new DonC();
-    $tab=$c->listdon();
+
+include "../../../Controller/DonC.php";
+$error = "";
+
+// create an instance of the controller
+$DonC = new DonC();
+$oldid = $_GET['id'];
+if (
+    isset($_POST["newmsg"])
+) {
+    if (
+        !empty($_POST['newmsg'])
+    ) {
+        $newmsg = $_POST['newmsg']; 
+        $DonC->updateDonUsermsg($newmsg,$oldid);
+        header('Location:table.php');
+    } else
+        $error = "Missing information";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -186,40 +201,21 @@
 
 
             <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4" style="width: 1000px;">
-                            <h6 class="mb-4">Donations</h6>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Deletion</th>
-                                        <th scope="col">id</th>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Message</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                        foreach($tab as $don){
-                                            echo("             
-                                         <tr>
-                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
-                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
-                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
-                                            <td>".$don['amount']."</td>
-                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
-                                        </tr>");
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
+            <form action="" method="POST" onsubmit="return messagecontrol()">
+            <div class="container-fluid">
+            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="form-floating mb-3">
+                            <textarea style="height:300px;" class="form-control" name="newmsg" placeholder="jhondoe" id="message"><?php echo($_GET['oldmsg'])?></textarea>
+                            <p style="position: relative;left: 280px; top: -150px;height: 0px;" id="messagecontrol"></p>
+                            <label for="floatingText">New Message:</label>
                         </div>
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Modify</button>
                     </div>
                 </div>
             </div>
+            </form>
             <!-- Table End -->
 
 
@@ -254,6 +250,7 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="js/saisie.js"></script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>

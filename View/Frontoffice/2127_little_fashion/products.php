@@ -1,3 +1,8 @@
+<?php
+    include "../../../Controller/ChariteC.php";
+    $c=new ChariteC();
+    $tab=$c->listcharite();
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -7,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Tooplate's Little Fashion - Contact Page</title>
+        <title>Tooplate's Little Fashion - Products</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +27,6 @@
         <link rel="stylesheet" href="css/slick.css"/>
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-        
 <!--
 
 Tooplate 2127 Little Fashion
@@ -49,7 +53,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong>i<span>Need</span></strong>
+                        <strong><span>Little</span> Fashion</strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -69,7 +73,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Products</a>
+                                <a class="nav-link active" href="products.html">Products</a>
                             </li>
 
                             <li class="nav-item">
@@ -77,10 +81,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="contact.html">Donation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:250px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" href="contact.html">Donation</a>
                             </li>
                         </ul>
 
@@ -93,75 +94,52 @@ https://www.tooplate.com/view/2127-little-fashion
                 </div>
             </nav>
 
-            <header class="site-header section-padding-img site-header-image">
+            <header class="site-header section-padding d-flex justify-content-center align-items-center">
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-lg-10 col-12 header-info">
+                        <div class="col-lg-10 col-12">
                             <h1>
-                                <span class="d-block text-primary">Donate to a charity</span>
-                                <span class="d-block text-dark">Heal the world</span>
+                                <span class="d-block text-primary">Choose your</span>
+                                <span class="d-block text-dark">Best Charity</span>
                             </h1>
                         </div>
                     </div>
                 </div>
-
-                <img src="images/people-carrying-donation-charity-related-icons_53876-43091.avif" class="header-image img-fluid" alt="">
             </header>
 
-            <section class="contact section-padding">
+            <section class="products section-padding">
                 <div class="container">
                     <div class="row">
-                        <h2 class="mb-4">Let's <span>Donate:</span></h2>
-                        <div class="col-lg-6 col-12" style="margin-left: 320px;">
-                            
-
-                            <form class="contact-form" role="form" id="form" onsubmit="return saisie()" action="Payment.php">
-                                <div class="form-floating">
-                                    <input type="text" name="id" id="id" class="form-control" placeholder="ID" onkeyup="idcontrol()">
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="idcontrol"></p>
-                                    <label for="id">ID</label>
-                                </div>
-                                <div class="form-floating">
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Full name" onkeyup="namecontrol()">
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="namecontrol"></p>
-                                    <label for="name">Full name</label>
-                                </div>
-
-                                <div class="form-floating my-4">
-                                    <input type="text" name="email" id="email" class="form-control" placeholder="Email address" onkeyup="emailcontrol()">
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="emailcontrol"></p>
-                                    <label for="email">Email address</label>
-                                </div>
-                                <div class="form-floating my-4">
-                                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Amount" onkeyup="amountcontrol()">
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="amountcontrol"></p>
-                                    <label for="email">Amount(in Dollars $)</label>
-                                </div>
-                                <div class="form-floating my-4">
-                                    <select name="charity" id="select" class="form-control" style="padding-top: 11px;">
-                                        <option value="" selected disabled>Select a Charity</option>
-                                        <option value="Red Cross">Red Cross</option>
-                                        <option value="Save the children">Save the children</option>
-                                        <option value="Care international">Care international</option>
-                                        <option value="Children international">Children international</option>
-                                    </select>
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="selectcontrol"></p>
-                                </div>
-                                <div class="form-floating mb-4">
-                                    <textarea id="message" name="message" class="form-control" placeholder="Leave a comment here" style="height: 160px" onkeyup="messagecontrol()"></textarea>
-                                    <p style="position: relative;left: 650px; bottom: 63px;height: 0px;" id="messagecontrol"></p>
-                                    <label for="message">Message</label>
-                                </div>
-
-                                <div class="col-lg-5 col-6">
-                                    <button type="submit" class="form-control" style="margin-left: 180px;" id="but">Proceed to Payment</button>
-                                </div>
-                            </form>
+                        
+                        <div class="col-12">
+                            <h2 class="mb-5">Our Charities:</h2>
                         </div>
+                        <?php
+                        foreach($tab as $charite){
+                            echo("                        
+                            <div class='col-lg-4 col-12 mb-3' style='border: 1px solid #000;box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.3);'>
+                            <div class='product-thumb'>
+                                <div class='product-info d-flex'>
+                                    <div>
+                                        <h5 class='product-title mb-0'>
+                                            <a href='contact.html?id=".$charite["id_charite"]."' class='product-title-link'>".$charite["nom_charite"]."</a>
+                                        </h5>
+
+                                        <p class='product-p'>".$charite["description"]."</p>
+                                        <p class='product-p'><span style='font-weight:bold;color:black;'>Founder:</span>".$charite["fullnamefondateur"]."</p>
+                                        <p class='product-p'><span style='font-weight:bold;color:black;'>Email:</span>".$charite["email"]."</p>
+                                        <p class='product-p'><span style='font-weight:bold;color:black;'>Tel:</span>".$charite["tel"]."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>");
+                        }
+                        ?>
                     </div>
                 </div>
             </section>
+
         </main>
 
         <footer class="site-footer">
@@ -169,9 +147,10 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">i</a> Need</h4>
-                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>I Need</strong></p>
+                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
                         <br>
+                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
                     </div>
 
                     <div class="col-lg-5 col-8">
@@ -186,7 +165,7 @@ https://www.tooplate.com/view/2127-little-fashion
 
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
 
-                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Donation</a></li>
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
                         </ul>
                     </div>
 
@@ -216,6 +195,6 @@ https://www.tooplate.com/view/2127-little-fashion
         <script src="js/jQuery.headroom.js"></script>
         <script src="js/slick.min.js"></script>
         <script src="js/custom.js"></script>
-        <script src="js/controlsaisie.js"></script>
+
     </body>
 </html>

@@ -6,16 +6,14 @@ $error = "";
 // create an instance of the controller
 $DonC = new DonC();
 $oldid = $_GET['id'];
-
 if (
-    isset($_GET["newid"])
+    isset($_POST["newid"])
 ) {
     if (
-        !empty($_GET['newid'])
+        !empty($_POST['newid'])
     ) {
-        $newid = $_GET['newid']; 
-        
-        $DonC->updateDon($newid,$oldid);
+        $newid = $_POST['newid']; 
+        $DonC->updateDonUserid($newid,$oldid);
         header('Location:table.php');
     } else
         $error = "Missing information";
@@ -91,8 +89,8 @@ if (
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Donations</a>
+                    <a href="form.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
+                    <a href="table.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Donations</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -203,13 +201,14 @@ if (
 
 
             <!-- Table Start -->
-            <form action="" method="GET">
+            <form action="" method="POST" onsubmit="return idcontrol()">
             <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="newid" placeholder="jhondoe" value="<?php echo($_GET['id'])?>">
+                            <input type="text" class="form-control" name="newid" placeholder="jhondoe" value="<?php echo($_GET['id'])?>" id="id">
+                            <p style="position: relative;left: 260px; top: -55px;height: 0px;" id="idcontrol"></p>
                             <label for="floatingText">New Id:</label>
                         </div>
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Modify</button>
@@ -251,7 +250,7 @@ if (
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="js/saisie.js"></script>
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
