@@ -1,23 +1,35 @@
 <?php
     class forum
     {
-        public $idpost;
+        public $id;
+        public $auther;
+        public $title;
         public $text;
-        public $image;
+        public $date;
     
-        public function __construct($id=NULL , $text,$image)
+        public function __construct($id=NULL ,$auther,$title, $text,$date)
         {
-            $this->idpost = $id ;
+            $this->id = $id ;
+            $this->auther = $auther;
+            $this->title = $title ;
             $this->text = $text ;
-            $this->image = $image ;
+            $this->date = $date ;
+        }
+        public function getauther()
+        {
+            return $this->auther;
+        }
+        public function gettitle()
+        {
+            return $this->title;
         }
         public function gettext()
         {
             return $this->text;
         }
-        public function getimage()
+        public function getdate()
         {
-            return $this->image;
+            return $this->date;
         }
         
     }

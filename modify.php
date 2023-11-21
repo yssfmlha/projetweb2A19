@@ -4,16 +4,16 @@ include "forum.php";
 function getCurrentDateTime() {
     return date("Y-m-d H:i:s");
 }
-$postc = new postc();
-if (isset($_POST["auther"]) &&isset($_POST["title"]) &&isset($_POST["text"]) ) {
+$c=new postc();
+$id=$_GET["idd"];
+if (isset($_POST["auther"]) &&isset($_POST["title"]) && isset($_POST["text"]) ) {
     if (!empty($_POST["auther"]) &&!empty($_POST["title"]) &&!empty($_POST["text"]) ) {
-        $post = new forum(NULL,$_POST["auther"],$_POST["title"], $_POST["text"], getCurrentDateTime());
-        $postc->addpost($post);
+        $post = new forum(NULL,$_POST["auther"],$_POST["title"], $_POST["text"],getCurrentDateTime());
+        $c->updatepost($post,$id);
         header("Location: listpost.php");
     }
-} 
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +90,6 @@ if (isset($_POST["auther"]) &&isset($_POST["title"]) &&isset($_POST["text"]) ) {
                 <td>Text:</td>
                 <td><input type="text" name="text"></td>
             </tr>
-            <tr>
                 <td><input type="submit" value="Submit"></td>
                 <td><input type="reset" value="Cancel"></td>
             </tr>
