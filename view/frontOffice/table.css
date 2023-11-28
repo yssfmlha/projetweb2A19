@@ -1,0 +1,44 @@
+/* Reset some default styles for better consistency */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for table headers */
+  th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style for table cells */
+  td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  /* Add hover effect to table rows */
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Set alternating background color for rows */
+  tr:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  /* Style for the whole table container */
+  .table-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Add a subtle border to the table container */
+  .table-container table {
+    border: 2px solid #ddd;
+  }
