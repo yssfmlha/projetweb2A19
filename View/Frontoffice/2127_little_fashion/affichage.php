@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
+                    <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
@@ -69,18 +69,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Products</a>
+                                <a class="nav-link" href="products.php">Charities</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="faq.html">FAQs</a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Donation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" style="position:relative;left:250px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link active" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 

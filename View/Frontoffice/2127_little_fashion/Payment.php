@@ -4,7 +4,7 @@
     $DonC=new DonC();
     if(isset($_POST["cardnumber"])&&isset($_POST["date"])&&isset($_POST["cvv"])){
         if(!empty($_POST["cardnumber"])&&!empty($_POST["date"])&&!empty($_POST["cvv"])){
-            $Don=new Don($_GET["id"],$_GET["name"],$_GET["amount"],$_GET["message"],$_POST["cardnumber"],$_POST["date"],$_POST["cvv"]);
+            $Don=new Don($_GET["id"],$_GET["name"],$_GET["amount"],$_GET["message"],$_POST["cardnumber"],$_POST["date"],$_POST["cvv"],$_GET["idc"]);
             $DonC->addDon($Don);
             $link="affichage.php?id=".$_GET['id'];
             header('Location:'.$link);
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
+                    <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">Home</a>
                             </li>
@@ -78,18 +78,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Products</a>
+                                <a class="nav-link active" href="products.php">Charities</a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="faq.html">FAQs</a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link active" href="contact.html">Donation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:250px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
@@ -113,7 +109,7 @@
                         <h4 class="mb-4" style="margin-left: 560px; height: 15px;"><span>Amo</span>unt:</h4>
                         <h5 class="mb-4" style="margin-left: 603px; height: 15px;"><?php echo($_GET["amount"])?><span style="color: green;"> $</span></h5>
                         <h4 class="mb-4" style="margin-left: 490px; height: 15px;">Charity of <span>choice:</span></h4>
-                        <h5 class="mb-4" style="margin-left: 570px; height: 15px;"><?php echo($_GET["charity"])?></h5>
+                        <h5 class="mb-4" style="margin-left: 520px; height: 15px;"><?php echo($_GET["namec"])?></h5>
                         <h4 class="mb-4" style="margin-left: 555px; height: 23px;"><span>Mess</span>age:</h4>
                             <div class="col-lg-6 col-12" style="margin-left: 320px;">
                                     <div class="form-floating mb-4">

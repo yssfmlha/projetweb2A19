@@ -7,6 +7,7 @@
         private ?string $cardnum=null;
         private ?string $dateexpir=null;
         private ?string $CVV=null;
+        private ?string $idc=null;
         
         public function setid_user($i){
             $this->id_user=$i;
@@ -50,7 +51,13 @@
         public function getCVV(){
             return $this->CVV;
         }
-        public function __construct($id,$f,$a,$m,$c,$d,$cv){
+        public function setidc($ic){
+            $this->idc=$ic;
+        }
+        public function getidc(){
+            return $this->idc;
+        }
+        public function __construct($id,$f,$a,$m,$c,$d,$cv,$ic){
             $this->id_user=$id;
             $this->fullname=$f;
             $this->amount=$a;
@@ -58,6 +65,7 @@
             $this->cardnum=$c;
             $this->dateexpir=$d;
             $this->CVV=$cv;
+            $this->idc=$ic;
         }
      }
 ?>

@@ -51,7 +51,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>I Need</h3>
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -59,12 +59,12 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Youssef Mlaouhia</h6>
+                        <h6 class="mb-0">Jhon Doe</h6>
                         <span>Admin</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -73,9 +73,14 @@
                             <a href="element.html" class="dropdown-item">Other Elements</a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Donations</a>
+                    <a href="table.php" class="nav-item nav-link"><i class="fa fa-gift me-2"></i>Donations</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-hand-holding-heart me-2"></i>Charity</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="Charity.php" class="dropdown-item">Charities</a>
+                            <a href="form.php" class="dropdown-item">Add a Charity</a>
+                        </div>
+                    </div>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -191,27 +196,165 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4" style="width: 1000px;">
                             <h6 class="mb-4">Donations</h6>
+                            <h6 style="margin-left:690px;position:relative;bottom:43px;height:0px;">Filter By:</h6>
+                            <form id="form" method="GET" style="height:0px;">
+                            <select name="filter" onchange="submitForm()" style="border-radius:5px;margin-left:760px;position:relative;bottom:55px;color:grey;">
+                                <option value="" disabled <?php if(empty($_GET["filter"])){?>selected<?php }?>>------------------</option>
+                                <option value="charity" <?php if(isset($_GET["filter"])){if(!empty($_GET["filter"])){if($_GET["filter"]=="charity"){?>selected<?php }}}?>>Charity</option>
+                                <option value="amount" <?php if(isset($_GET["filter"])){if(!empty($_GET["filter"])){if($_GET["filter"]=="amount"){?>selected<?php }}}?>>Amount</option>
+                                <option value="name" <?php if(isset($_GET["filter"])){if(!empty($_GET["filter"])){if($_GET["filter"]=="name"){?>selected<?php }}}?>>Name</option>
+                            </select>
+                            <button class="btn btn-primary mb-4" style="margin-left:870px;position:relative;bottom:82px;width:100px;padding:0;"><a href="table.php" style='text-decoration: none;color: white;'>No Filter</a></button>
+                            <?php if(isset($_GET["filter"])){if(!empty($_GET["filter"])){if($_GET["filter"]=="charity"||$_GET["filter"]=="name"){?>
+                            <p for="search" style="margin-left:700px;position:relative;bottom:100px;color:black;"><b>Search:</b></p>
+                            <input type="text" id="search" name="search" style="margin-left:760px;position:relative;bottom:140px;width:100px;border-radius:5px;border-color:grey;color:grey;height:25px;">
+                            <button type="submit"class="btn btn-primary mb-4" style="margin-left:870px;position:relative;bottom:165px;width:100px;padding:0;">Search</button>
+                            <?php }}}?>
+                            </form>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Deletion</th>
-                                        <th scope="col">id</th>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">Message</th>
+                                        <?php
+                                        if(isset($_GET["filter"])){
+                                            if(!empty($_GET["filter"])){
+                                                if($_GET["filter"]=="charity"){
+                                                    echo("
+                                                        <th scope='col'>Deletion</th>
+                                                        <th scope='col'>Charité</th>
+                                                        <th scope='col'>id</th>
+                                                        <th scope='col'>Full Name</th>
+                                                        <th scope='col'>Amount</th>
+                                                        <th scope='col'>Message</th>
+                                                    ");
+                                                }
+                                                elseif($_GET["filter"]=="amount"){
+                                                    echo("
+                                                        <th scope='col'>Deletion</th>
+                                                        <th scope='col'>Amount</th>
+                                                        <th scope='col'>id</th>
+                                                        <th scope='col'>Full Name</th>
+                                                        <th scope='col'>Message</th>
+                                                        <th scope='col'>Charité</th>
+                                                    ");  
+                                                }
+                                                elseif($_GET["filter"]=="name"){
+                                                    echo("
+                                                        <th scope='col'>Deletion</th>
+                                                        <th scope='col'>Full Name</th>
+                                                        <th scope='col'>id</th>
+                                                        <th scope='col'>Full Name</th>
+                                                        <th scope='col'>Amount</th>
+                                                        <th scope='col'>Message</th>
+                                                        <th scope='col'>Charité</th>
+                                                    ");  
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            echo("
+                                            <th scope='col'>Deletion</th>
+                                            <th scope='col'>id</th>
+                                            <th scope='col'>Full Name</th>
+                                            <th scope='col'>Amount</th>
+                                            <th scope='col'>Message</th>
+                                            <th scope='col'>Charité</th>
+                                        ");
+                                        }
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        foreach($tab as $don){
-                                            echo("             
-                                         <tr>
-                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
-                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
-                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
-                                            <td>".$don['amount']."</td>
-                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
-                                        </tr>");
+                                        if(isset($_GET["filter"])){
+                                            if(!empty($_GET["filter"])){
+                                                if($_GET["filter"]=="charity"){
+                                                    if(isset($_GET["search"])&&!empty($_GET["search"])){
+                                                        $tabCharite=$c->searchdonByCharity($_GET["search"]);
+                                                        foreach($tabCharite as $don){
+                                                            echo("             
+                                                        <tr>
+                                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                            <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                            <td>".$don['amount']."</td>
+                                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                        </tr>");
+                                                        }
+                                                    }
+                                                    else{
+                                                        $tabCharite=$c->listdonOrderbyCharite();
+                                                        foreach($tabCharite as $don){
+                                                            echo("             
+                                                        <tr>
+                                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                            <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                            <td>".$don['amount']."</td>
+                                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                        </tr>");
+                                                        }
+                                                    }
+                                                }
+                                                elseif($_GET["filter"]=="amount"){
+                                                    $tabAmount=$c->listdonOrderbyAmount();
+                                                    foreach($tabAmount as $don){
+                                                        echo("             
+                                                    <tr>
+                                                        <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                        <td>".$don['amount']."</td>
+                                                        <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                        <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                        <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                        <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                                    </tr>");
+                                                    }
+                                                }
+                                                elseif($_GET["filter"]=="name"){
+                                                    if(isset($_GET["search"])&&!empty($_GET["search"])){
+                                                        $tabName=$c->searchdonByName($_GET["search"]);
+                                                        foreach($tabName as $don){
+                                                            echo("             
+                                                        <tr>
+                                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                            <td>".$don['amount']."</td>
+                                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                            <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                                        </tr>");
+                                                        }
+                                                    }
+                                                    else{
+                                                        $tabName=$c->listdonOrderbyName();
+                                                        foreach($tabName as $don){
+                                                            echo("             
+                                                        <tr>
+                                                            <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                            <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                            <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                            <td>".$don['amount']."</td>
+                                                            <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                            <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                                        </tr>");
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else{
+                                            foreach($tab as $don){
+                                                echo("             
+                                            <tr>
+                                                <th scope='row'><a href='Delete.php?id=".$don['id_don']."'>Delete</a></th>
+                                                <th scope='row'><a href='Changeid.php?id=".$don['id_user']."'>".$don['id_user']."</a></th>
+                                                <td style='white-space: nowrap;'><a href='Changenom.php?id=".$don['id_user']."&oldnom=".$don['fullname']."'>".$don['fullname']."</a></td>
+                                                <td>".$don['amount']."</td>
+                                                <td><a href='Changemsg.php?id=".$don['id_user']."&oldmsg=".$don['message']."'>".$don['message']."</a></td>
+                                                <td><a href='charity.php?id= ".$don['id_charite']."'>".$don['nom_charite']."</a></td>
+                                            </tr>");
+                                            }
                                         }
                                     ?>
                                 </tbody>
