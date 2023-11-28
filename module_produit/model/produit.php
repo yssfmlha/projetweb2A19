@@ -5,15 +5,28 @@ class produit
     private ?string $nom_produit = null;
     private ?string $prix_produit = null;
     private ?string $qte_produit = null;
+    private ?int $categorie_ref = null;
 
 
-    public function __construct($id = null, $n, $p, $a)
+    public function __construct($id = null, $n, $p, $a, $categorie_ref = null)
     {
         $this->id_produit = $id;
         $this->nom_produit = $n;
         $this->prix_produit = $p;
         $this->qte_produit = $a;
+        $this->categorie_ref = $categorie_ref;
         
+    }
+    public function getcategorie_ref()
+    {
+        return $this->categorie_ref;
+    }
+
+    public function setcategorie_ref($categorie_ref)
+    {
+        $this->categorie_ref = $categorie_ref;
+
+        return $this;
     }
 
 

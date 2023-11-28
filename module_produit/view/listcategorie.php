@@ -1,8 +1,13 @@
+
+
 <?php
-include "../controller/produitC.php";
-$c = new produitC();
-$tab = $c->listproduit();
+include '../controller/categorieC.php';
+$c = new categorieC();
+$tab = $c->listcategorie();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -191,29 +196,31 @@ $tab = $c->listproduit();
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id produit</th>
-                                        <th scope="col">Nom produit</th>
-                                        <th scope="col">prix_produit</th>
-                                        <th scope="col">quantité produit</th>
+                                        <th scope="col">Id_categorie</th>
+                                        <th scope="col">nom_categorie</th>
+                                        <th scope="col">action/admin</th>
+                                        <th scope="col">action/admin</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <?php foreach ($tab as $produit) : ?>
-            <tr>
-                <td><?= $produit['id_produit']; ?></td>
-                <td><?= $produit['nom_produit']; ?></td>
-                <td><?= $produit['prix_produit']; ?></td>
-                <td><?= $produit['qte_produit']; ?></td>
+                                <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Categories</h6>
 
-                <td align="center">
-                    <form method="POST" action="updateproduit.php">
-                        <input type="submit" name="updateproduit" value="updateproduit">
-                        <input type="hidden" value="<?= $produit['id_produit']; ?>" name="id_produit">
-                    </form>
-                </td>
-                <td>
-                    <a href="deleteproduit.php?id_produit=<?= $produit['id_produit']; ?>">Delete</a>
-                </td>
+                <!-- Search Input -->
+                <div class="mb-3">
+                    <label for="searchId" class="form-label">Search by ID:</label>
+                    <input type="text" class="form-control" id="searchId" oninput="searchCategoriesById()">
+                </div>
+                                
+                                <tbody>
+                                    <?php foreach ($tab as $categorie) : ?>
+            <tr>
+                <td><?php echo $categorie["Id_categorie"]; ?></td>
+                <td><?php echo $categorie["nom_categorie"]; ?></td>
+                <td><a href="deletecategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Delete</a></td>
+                <td><a href="updatecategorie.php?Id_categorie=<?php echo $categorie["Id_categorie"]; ?>">UPDATE</a></td>
             </tr>
         <?php endforeach; ?>
                                 </tbody>
@@ -223,6 +230,27 @@ $tab = $c->listproduit();
                 </div>
             </div>
             <!-- Table End -->
+            <script>
+    function searchCategoriesById() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchId");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("categoryTableBody");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 
             <!-- Footer Start -->

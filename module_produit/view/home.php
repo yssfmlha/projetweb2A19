@@ -1,3 +1,9 @@
+
+<?php
+require '../controller/categorieC.php';
+$c = new categorieC();
+$tab = $c->listcategorie();
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -16,12 +22,12 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap-icons.css" rel="stylesheet">
 
-        <link rel="stylesheet" href="css/slick.css"/>
+        <link rel="stylesheet" href="../css/slick.css"/>
 
-        <link href="css/tooplate-little-fashion.css" rel="stylesheet">
+        <link href="../css/tooplate-little-fashion.css" rel="stylesheet">
 <!--
 
 Tooplate 2127 Little Fashion
@@ -110,88 +116,154 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-12">
                             <h2 class="mb-5">Categories</h2>
                         </div>
+                        
+                        <?php foreach ($tab as $categorie) {  ?>
 
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                
-                                    <img src="images/vet/clothing.webp" class="img-fluid product-image" alt="">
-                                </a>
+<div class="col-lg-4 col-12 mb-3">
+    <div class="product-thumb">
+        <a href="products.php">
+            <img src="../images/vet/clothing.webp" class="img-fluid product-image" alt="">
+        </a>
 
-                                <div class="product-top d-flex">
-                                    <span class="product-alert me-auto">Categories</span>
+        <div class="product-info d-flex">
+            <div>
+                <h5 class="product-title mb-0">
+                    <a href="addproduit.php?categorie_ref=<?php echo ($categorie['Id_categorie'])?>" class="product-title-link"><?php echo $categorie['nom_categorie'];?></a>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                    <a href="#" class="bi-heart-fill product-icon"></a>
-                                </div>
+<?php }?>
+<!DOCTYPE html>
+<html lang="en">
 
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="products.html" class="product-title-link">Vetements</a>
-                                        </h5>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
 
-                                        
-                                    </div>
+        #calendar-container {
+            width: 250px;
+            margin: 20px;
+        }
 
-                                </div>
-                            </div>
-                        </div>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
 
-                        <div class="col-lg-4 col-12 mb-3">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="images/vet/bijoux.jpg" class="img-fluid product-image" alt="">
-                                </a>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+        }
 
-                               
+        th {
+            background-color: #f2f2f2;
+        }
 
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="bijoux.html" class="product-title-link">bijoux</a>
-                                            
-                                        </h5>
+        #current-time {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
 
-                                        
-                                    </div>
+<body>
 
-                                  
-                                </div>
-                            </div>
-                        </div>
+    <div id="calendar-container">
+        <h2 style="margin-bottom: 0;"><?php echo date('F Y'); ?></h2>
+        <table>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
 
-                        <div class="col-lg-4 col-12">
-                            <div class="product-thumb">
-                                <a href="product-detail.html">
-                                    <img src="images/vet/electro.jpg" class="img-fluid product-image" alt="">
-                                </a>
+            <tr>
+                <?php
+                $currentMonth = date('n');
+                $currentYear = date('Y');
+                $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, $currentYear);
+                $firstDay = date('w', strtotime("{$currentYear}-{$currentMonth}-01"));
 
-                                <div class="product-top d-flex">
-                                    <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                </div>
+                for ($i = 0; $i < $firstDay; $i++) {
+                    echo '<td></td>';
+                }
 
-                                <div class="product-info d-flex">
-                                    <div>
-                                        <h5 class="product-title mb-0">
-                                            <a href="electronique.html" class="product-title-link">electroniques</a>
-                                        </h5>
+                for ($day = 1; $day <= $daysInMonth; $day++) {
+                    echo "<td>{$day}</td>";
 
-                                       
-                                    </div>
+                    if (($firstDay + $day) % 7 == 0) {
+                        echo '</tr><tr>';
+                    }
+                }
 
-                                 
-                                </div>
-                            </div>
-                        </div>
+                $lastDay = date('w', strtotime("{$currentYear}-{$currentMonth}-{$daysInMonth}"));
+                for ($i = 0; $i < (6 - $lastDay); $i++) {
+                    echo '<td></td>';
+                }
+                ?>
+            </tr>
+        </table>
+
+        <div id="current-time">Current Time: <span id="time"></span></div>
+    </div>
+
+    <script>
+        function updateTime() {
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+
+            hours = (hours < 10 ? '0' : '') + hours;
+            minutes = (minutes < 10 ? '0' : '') + minutes;
+            seconds = (seconds < 10 ? '0' : '') + seconds;
+
+            var formattedTime = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('time').innerHTML = formattedTime;
+
+            setTimeout(updateTime, 1000);
+        }
+
+        updateTime();
+    </script>
+
+</body>
+
+</html>
+
+    
+    
 
                         
-
-
+            
         <footer class="site-footer">
             <div class="container">
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a> need</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Ineed</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Anis</a></p>
@@ -233,12 +305,12 @@ https://www.tooplate.com/view/2127-little-fashion
         </footer>
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/Headroom.js"></script>
-        <script src="js/jQuery.headroom.js"></script>
-        <script src="js/slick.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="../js/jquery.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="../js/Headroom.js"></script>
+        <script src="../js/jQuery.headroom.js"></script>
+        <script src="../js/slick.min.js"></script>
+        <script src="../js/custom.js"></script>
 
     </body>
 </html>

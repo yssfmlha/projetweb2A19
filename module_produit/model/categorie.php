@@ -7,13 +7,18 @@ class categorie
 
     public function __construct($Id_categorie = NULL, $nom_cat)
     {
-        $this->Id_categorie_categorie = $id;
+        $this->Id_categorie = $Id_categorie;
         $this->nom_cat = $nom_cat;
     }
 
     public function get_Id_categorie()
     {
         return $this->Id_categorie;
+    }
+
+    public function getnom_cat()
+    {
+        return $this->nom_cat;
     }
 
     public function setnom_cat($n)

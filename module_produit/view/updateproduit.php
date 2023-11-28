@@ -13,7 +13,8 @@ $produitC = new produitC();
 if (
     isset($_POST["nom_produit"]) &&
     isset($_POST["prix_produit"]) &&
-    isset($_POST["qte_produit"]) 
+    isset($_POST["qte_produit"]) &&
+    isset($_POST)
 ) {
     if (
         !empty($_POST['nom_produit']) &&

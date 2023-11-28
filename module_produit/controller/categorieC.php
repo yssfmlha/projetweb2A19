@@ -1,8 +1,9 @@
 <?php
-include '../Opener.php';
+require '../opener.php';
+
 
 class categorieC 
-{
+{   
     public function getcategorie($Id_categorie)
     {
         try
@@ -66,22 +67,36 @@ class categorieC
             die("Erreur!!".$e->getMessage()) ;
         }
     }
-
-    public function updatecategorie($categorie, $Id_categorie)
+    function showcategorie($Id_categorie)
     {
+        $sql = "SELECT * from categorie where Id_categorie = $Id_categorie";
         $db = config::getConnexion();
-        $query = $db->prepare(
-            'UPDATE categorie SET nom_cat = :nom_cat
-            WHERE Id_categorie  = :Id_categorie '
-        );
         try {
-            $query->execute([
-                'Id_categorie ' => $Id_categorie,
-                'nom_cat' => $categorie->nom_cat
-            ]);
+            $query = $db->prepare($sql);
+            $query->execute();
+            $joueur = $query->fetch();
+            return $categorie;
         } catch (Exception $e) {
-            die("Erreur!!" . $e->getMessage());
+            die('Error: ' . $e->getMessage());
         }
     }
+
+public function updatecategorie($categorie, $Id_categorie)
+{
+    $db = config::getConnexion();
+    $query = $db->prepare(
+        'UPDATE categorie SET nom_categorie = :nom_cat
+        WHERE Id_categorie = :Id_categorie'  // Remove the extra space in ':Id_categorie '
+    );
+    try {
+        $query->execute([
+            'Id_categorie' => $Id_categorie,
+            'nom_cat' => $categorie->getnom_cat()
+        ]);
+    } catch (Exception $e) {
+        die("Erreur!!" . $e->getMessage());
+    }
+}
+
 }
 ?>

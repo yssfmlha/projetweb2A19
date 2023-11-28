@@ -1,13 +1,8 @@
-
-
 <?php
-include '../controller/categorieC.php';
-$c = new categorieC();
-$tab = $c->listcategorie();
+include "../controller/produitC.php";
+$c = new produitC();
+$tab = $c->listproduit();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -192,23 +187,35 @@ $tab = $c->listcategorie();
                 <div class="row g-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Categories</h6>
+                            <h6 class="mb-4">Produit</h6>
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id_categorie</th>
-                                        <th scope="col">nom_categorie</th>
-                                        <th scope="col">action/admin</th>
-                                        <th scope="col">action/admin</th>
+                                        <th scope="col">Id produit</th>
+                                        <th scope="col">Nom produit</th>
+                                        <th scope="col">prix_produit</th>
+                                        <th scope="col">quantité produit</th>
+                                        <th scope="col">categorie</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($tab as $categorie) : ?>
+                                <?php foreach ($tab as $produit) : ?>
             <tr>
-                <td><?php echo $categorie["nom_categorie"]; ?></td>
-                <td><?php echo $categorie["Id_categorie"]; ?></td>
-                <td><a href="deletecategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Delete</a></td>
-                <td><a href="updatecategorie.php?Id_categorie=<?php echo $categorie["Id_categorie"]; ?>">UPDATE</a></td>
+                <td><?= $produit['id_produit']; ?></td>
+                <td><?= $produit['nom_produit']; ?></td>
+                <td><?= $produit['prix_produit']; ?></td>
+                <td><?= $produit['qte_produit']; ?></td>
+                <td><?= $produit['nom_produit']; ?></td>
+
+                <td align="center">
+                    <form method="POST" action="updateproduit.php">
+                        <input type="submit" name="updateproduit" value="updateproduit">
+                        <input type="hidden" value="<?= $produit['id_produit']; ?>" name="id_produit">
+                    </form>
+                </td>
+                <td>
+                    <a href="deleteproduit.php?id_produit=<?= $produit['id_produit']; ?>">Delete</a>
+                </td>
             </tr>
         <?php endforeach; ?>
                                 </tbody>

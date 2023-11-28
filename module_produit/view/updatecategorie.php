@@ -3,6 +3,15 @@
 include '../controller/categorieC.php';
 include '../model/categorie.php';
 $error = "";
+$Ctg= new categorieC() ;
+$tab = $Ctg->listcategorie() ;
+foreach($tab as $CTG )
+{
+    if($CTG['Id_categorie'] == $_GET['Id_categorie'])
+    {
+        break;
+    }
+}
 
 // create client
 $categorie = null;
@@ -20,9 +29,9 @@ if (
         foreach ($_POST as $key => $value) {
             echo "Key: $key, Value: $value<br>";
         }
-        $produit = new categorie(
-            null,
-            $_POST['nom_categorie'],
+        $categorie = new categorie(
+            $_POST['Id_categorie'],
+            $_POST['nom_categorie']
             
         );
         var_dump($categorie);
@@ -53,25 +62,19 @@ if (
         <?php echo $error; ?>
     </div>
 
-    <?php
-    if (isset($_POST['Id_categorie'])) {
-        $produit = $produitC->showproduit($_POST['Id_categorie']);
-        
-    ?>
-
         <form action="" method="POST">
             <table>
             <tr>
                     <td><label for="nom">Id categorie :</label></td>
                     <td>
-                        <input type="text" id="Id_categorie" name="Id_categorie" value="<?php echo $_POST['Id_categorie'] ?>" readonly />
+                        <input type="text" id="Id_categorie" name="Id_categorie" value="<?php echo $CTG['Id_categorie'] ?>" readonly />
                         <span id="erreurNom" style="color: red"></span>
                     </td>
                 </tr>
                 <tr>
                     <td><label for="nom">Nom :</label></td>
                     <td>
-                        <input type="text" id="nom_categorie" name="nom_categorie" value="<?php echo $produit['nom_categorie'] ?>" />
+                        <input type="text" id="nom_categorie" name="nom_categorie" value="<?php echo $CTG['nom_categorie'] ?>" />
                         <span id="erreurNom" style="color: red"></span>
                     </td>
                 </tr>
@@ -88,7 +91,6 @@ if (
 
         </form>
     <?php
-    }
     ?>
 </body>
 

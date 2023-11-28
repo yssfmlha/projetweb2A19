@@ -36,7 +36,7 @@ class produitC
     {
        
         $sql = "INSERT INTO produit 
-        VALUES (NULL, :nom_produit,:prix_produit, :qte_produit)";
+        VALUES (NULL, :nom_produit,:prix_produit, :qte_produit,:categorie_ref)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
@@ -44,6 +44,7 @@ class produitC
                 'nom_produit' => $produit->getnom_produit(),
                 'prix_produit' => $produit->getprix_produit(),
                 'qte_produit' => $produit->getqte_produit(),
+                'categorie_ref' => $produit->getcategorie_ref()
                 
             ]);
         } catch (Exception $e) {
