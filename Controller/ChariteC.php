@@ -57,4 +57,26 @@
                 die("erreur".$e->getMessage());                
             }
         }
+        public function dataCharite(){
+            $sql="SELECT COUNT(id_don) AS don,nom_charite FROM don,charite WHERE don.id_charite=charite.id_charite GROUP BY don.id_charite";
+            $db=config::getConnexion();
+            try{
+                $list=$db->query($sql);
+                return $list;
+            }
+            catch(Exception $e){
+                die("erreur".$e->getMessage());                
+            }
+        }
+        public function Total(){
+            $sql="SELECT COUNT(*) AS d FROM don";
+            $db=config::getConnexion();
+            try{
+                $list=$db->query($sql);
+                return $list->fetchAll();
+            }
+            catch(Exception $e){
+                die("erreur".$e->getMessage());                
+            }
+        }
     }
