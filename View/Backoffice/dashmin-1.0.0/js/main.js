@@ -59,19 +59,6 @@
     });
 
 
-    //random color
-    function getRandomColor() {
-        // Generate random values for red, green, blue, and alpha
-        const red = Math.floor(Math.random() * 256);
-        const green = Math.floor(Math.random() * 256);
-        const blue = Math.floor(Math.random() * 256);
-        const alpha = Math.random().toFixed(2); // Fixed to 2 decimal places for alpha (transparency)
-      
-        // Create the RGBA color string
-        const rgbaColor = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
-      
-        return rgbaColor;
-      }
     //test
         var ctx1 = $("#test").get(0).getContext("2d");
         var myChart2 = new Chart(ctx1, {
@@ -81,7 +68,8 @@
                 datasets: [{
                         label: "Donations",
                         data: [],
-                        backgroundColor: []
+                        
+                        backgroundColor: ["rgb(0, 204, 255)","rgb(0, 153, 255)","rgb(0, 0, 255)","rgb(204, 153, 255)"]
                     }
                 ]
                 },
@@ -101,30 +89,45 @@
             myChart2.data.datasets.forEach((dataset) => {
                 percent=(elements.value/total.value)*100;
                 dataset.data.push(percent);
-                dataset.backgroundColor.push(getRandomColor());
             });
         })
         myChart2.update();
-    
-
-
-    // Single Line Chart
-    var ctx3 = $("#line-chart").get(0).getContext("2d");
-    var myChart3 = new Chart(ctx3, {
-        type: "line",
+    //money
+    var ctx2 = $("#amount").get(0).getContext("2d");
+    var myChart3 = new Chart(ctx2, {
+        type: "bar",
         data: {
-            labels: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+            labels: [],
             datasets: [{
-                label: "Salse",
-                fill: false,
-                backgroundColor: "rgba(0, 156, 255, .3)",
-                data: [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15]
-            }]
-        },
+                    label: "Donations",
+                    data: [],
+                    
+                    backgroundColor: ["rgb(0, 204, 255)","rgb(0, 153, 255)","rgb(0, 0, 255)","rgb(204, 153, 255)"]
+                }
+            ]
+            },
         options: {
             responsive: true
         }
     });
+    var anames=document.getElementsByName("amountname");
+    var dataamount=document.getElementsByName("amount");
+    anames.forEach((element ) => {
+        myChart3.data.labels.push(element.value.toString());
+    })
+    dataamount.forEach((elements) => {
+        console.log(elements.value);
+        myChart3.data.datasets.forEach((dataset) => {
+            dataset.data.push(elements.value);
+        });
+    })
+    myChart3.data.datasets.forEach((dataset) => {
+        dataset.data.push(300);
+    });
+    myChart3.update();
+    
+
+
 
 
     // Single Bar Chart

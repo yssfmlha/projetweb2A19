@@ -79,4 +79,15 @@
                 die("erreur".$e->getMessage());                
             }
         }
+        public function dataAmount(){
+            $sql="SELECT SUM(don.amount) AS sum,nom_charite AS chart FROM don,charite WHERE don.id_charite=charite.id_charite GROUP BY don.id_charite";
+            $db=config::getConnexion();
+            try{
+                $list=$db->query($sql);
+                return $list;
+            }
+            catch(Exception $e){
+                die("erreur".$e->getMessage());                
+            }
+        }
     }
