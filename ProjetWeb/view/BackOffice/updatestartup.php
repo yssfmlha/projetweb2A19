@@ -15,7 +15,6 @@ if(!empty($_POST["Nom"])&&!empty($_POST["domaine"])&&!empty($_POST["nom_fon"])&&
 }
 }
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,6 +47,7 @@ if(!empty($_POST["Nom"])&&!empty($_POST["domaine"])&&!empty($_POST["nom_fon"])&&
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="controle_saisie_startup.js"></script>
 </head>
 
 <body>
@@ -204,7 +204,7 @@ if(!empty($_POST["Nom"])&&!empty($_POST["domaine"])&&!empty($_POST["nom_fon"])&&
                 <div class="row g-4">
 
                 <div class="gab">
-<form  method="POST" id="forma">
+<form  method="POST" onsubmit="return ISR();">
     <div class="row">
     <div class="input-groupe">
             <input type="text"  id="Nom" name="Nom">
@@ -212,31 +212,31 @@ if(!empty($_POST["Nom"])&&!empty($_POST["domaine"])&&!empty($_POST["nom_fon"])&&
             <span id="1"></span>
         </div>        
         <div class="input-groupe">
-            <input type="text"  id="Domaine" name="domaine" >
-            <label for="Domaine"> <i class="fa-solid fa-suitcase"></i> Domaine du Startup</label>
+            <input type="text"  id="domaine" name="domaine" >
+            <label for="Ddmaine"> <i class="fa-solid fa-suitcase"></i> Domaine du Startup</label>
             <span id="2"></span>
         </div>
     </div>
-    <div class="row2">
+    <div class="row">
         <div class="input-groupe">
-            <input type="text"  id="nom_fon" name="nom_fon">
-            <label for="LastName"> <i class="fa-solid fa-user"></i> Nom  du fondateur</label>
+            <input type="text"  id="nom_f" name="nom_fon">
+            <label for="nom_fon"> <i class="fa-solid fa-user"></i> Nom  du fondateur</label>
             <span id="3"></span>
         </div>
         <div class="input-groupe">
-            <input type="text"  id="prenom_fon" name="prenom_fon">
-            <label for="FirstName"> <i class="fa-solid fa-user"></i> Prénom du fondateur</label>
+            <input type="text"  id="prenom_f" name="prenom_fon">
+            <label for="prenom_fon"> <i class="fa-solid fa-user"></i> Prénom du fondateur</label>
             <span id="4"></span>
         </div>
     </div>
     <div class="input-groupe">
         <textarea   id="description" rows="8" name="description"></textarea>
-        <label for="Description"><i class="fa-solid fa-pen"></i> Description</label>
+        <label for="description"><i class="fa-solid fa-pen"></i> Description</label>
         <span id="5"></span>
     </div>
     <div class="input-groupe">
-        <input type="email"  id="email" name="email">
-        <label for="gmail"><i class="fa-solid fa-envelope"></i> Adresse Email</label>
+        <input type="text"  id="email" name="email">
+        <label for="email"><i class="fa-solid fa-envelope"></i> Adresse Email</label>
         <span id="6"></span>
     </div>
     <div class="input-groupe">

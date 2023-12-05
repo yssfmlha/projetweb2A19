@@ -70,5 +70,65 @@ class startupC{
             die("Error".$e->getMessage());
         }
     }
+    public function SearchStartup($Nom1)
+    {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM startup2 WHERE Nom = :Nom1');
+                $stmt->execute(['Nom1' => $Nom1]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+    }
+    public function statistiqueDomaine() {
+        $startups = $this->afficherstartup(); 
+
+        $domaineCount = array();
+
+        foreach ($startups as $startup) {
+            $domaine = $startup['domaine'];
+
+            if (isset($domaineCount[$domaine])) {
+                $domaineCount[$domaine]++;
+            } else {
+                $domaineCount[$domaine] = 1;
+            }
+        }
+
+        // Préparer les données pour le graphique
+        $domaines = array_keys($domaineCount);
+        $nombreStartups = array_values($domaineCount);
+
+        // Générer le code JavaScript pour le graphique
+        echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
+        echo '<canvas id="myChart" width="100" height="100"></canvas>';
+        echo '<script>';
+        echo 'var ctx = document.getElementById("myChart").getContext("2d");';
+        echo 'var myChart = new Chart(ctx, {';
+        echo 'type: "bar",';
+        echo 'data: {';
+        echo 'labels: ' . json_encode($domaines) . ',';
+        echo 'datasets: [{';
+        echo 'label: "Nombre de Startups par Domaine",';
+        echo 'data: ' . json_encode($nombreStartups) . ',';
+        echo 'backgroundColor: "rgba(75, 192, 192, 0.2)",';
+        echo 'borderColor: "rgba(75, 192, 192, 1)",';
+        echo 'borderWidth: 1';
+        echo '}]';
+        echo '},';
+        echo 'options: {';
+        echo 'scales: {';
+        echo 'y: {';
+        echo 'beginAtZero: true';
+        echo '}';
+        echo '}';
+        echo '}';
+        echo '});';
+        echo '</script>';
+    }
 }
 ?>

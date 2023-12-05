@@ -2,12 +2,13 @@
     require "../../controle/startupC.php";
     require "../../modele/startup.php";
     $startupC=new startupC();
-    if(isset($_POST["Nom"])&&isset($_POST["domaine"])&&isset($_POST["nom_fon"])&&isset($_POST["prenom_fon"]) &&isset($_POST["description"])
-    &&isset($_POST["email"])  &&isset($_POST["tel"]) ){
-        if(!empty($_POST["Nom"])&&!empty($_POST["domaine"])&&!empty($_POST["nom_fon"])&&!empty($_POST["prenom_fon"])
-        &&!empty($_POST["description"]) &&!empty($_POST["email"])&&!empty($_POST["tel"])){
-            $startup=new startup(NULL,$_POST["Nom"],$_POST["domaine"],
-            $_POST["nom_fon"],$_POST["prenom_fon"],$_POST["description"],$_POST["email"],$_POST["tel"]);
+    if(isset($_POST["Nom1"])&&isset($_POST["domaine1"])&&isset($_POST["nom_f1"])&&isset($_POST["prenom_f1"]) &&isset($_POST["description1"])
+    &&isset($_POST["email1"])  &&isset($_POST["tel1"]) ){
+        if(!empty($_POST["Nom1"])&&!empty($_POST["domaine1"])&&!empty($_POST["nom_f1"])&&!empty($_POST["prenom_f1"])
+        &&!empty($_POST["description1"]) &&!empty($_POST["email1"])&&!empty($_POST["tel1"])){
+
+            $startup=new startup(NULL,$_POST["Nom1"],$_POST["domaine1"],
+            $_POST["nom_f1"],$_POST["prenom_f1"],$_POST["description1"],$_POST["email1"],$_POST["tel1"]);
             $startupC->addstartup($startup);
             header("Location:liste.php");
             
@@ -38,7 +39,7 @@
         <link rel="stylesheet" href="css/slick.css"/>
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-        <script src=controle_saisie.js></script>
+        <script src="controle_saisie_startup.js"></script>
         
 <!--
 
@@ -94,7 +95,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="userdon_startup.php">don startup</a>
+                                <a class="nav-link" href="userprojets.php">Projets</a>
                             </li>
                         </ul>
 
@@ -130,49 +131,50 @@ https://www.tooplate.com/view/2127-little-fashion
                         <div class="col-lg-6 col-12">
                             <h2 class="mb-4">Let's <span>begin</span></h2>
 
-                            <form class="contact-form me-lg-5 pe-lg-3" role="form">
+                            <form class="contact-form me-lg-5 pe-lg-3" role="form" method="POST" onsubmit="return ISR();">
 
                                 <div class="form-floating">
-                                    <input type="text" name="Nom" id="Nom" class="form-control" placeholder="Nom du startup">
-
-                                    <label for="Nom startup">Nom startup</label>
+                                    <input type="text" name="Nom1" id="Nom" class="form-control" placeholder="Nom du startup">
+                                    <span id="1"></span>
+                                    <label for="Nom1">Nom startup</label>
                                 </div>
 
                                 <div class="form-floating my-4">
-                                    <input type="text" name="domaine" id="domaine"class="form-control" placeholder="Domaine" >
-
-                                    <label for="Domaine">Domaine</label>
+                                    <input type="text" name="domaine1" id="domaine"class="form-control" placeholder="Domaine" >
+                                    <span id="2"></span>
+                                    <label for="domaine1">Domaine</label>
                                 </div>
                                 
                                 <div class="form-floating my-4">
-                                    <input type="text" name="nom_f" id="nom_f"class="form-control" placeholder="Nom du fondateur">
-
-                                    <label for="Nom du fondateur">Nom du fondateur</label>
+                                    <input type="text" name="nom_f1" id="nom_f"class="form-control" placeholder="Nom du fondateur">
+                                    <span id="3"></span>
+                                    <label for="nom_f1">Nom du fondateur</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
-                                <input type="text" name="prenom_f" id="prenom_f"class="form-control" placeholder="Prenom du fondateur">
-
-                                    <label for="Prenom du fondateur">Prenom du fondateur</label>
+                                <input type="text" name="prenom_f1" id="prenom_f"class="form-control" placeholder="Prenom du fondateur">
+                                <span id="4"></span>
+                                    <label for="prenom_f1">Prenom du fondateur</label>
                                 </div>
                                 <div class="form-floating mb-4">
-                                <textarea id="description" name="description" class="form-control" placeholder="description"style="height: 120px"></textarea>
-
-                                <label for="message">Description de votre startup</label>
+                                <textarea id="description" name="description1" class="form-control" placeholder="description"style="height: 120px"></textarea>
+                                <span id="5"></span>
+                                <label for="description1">Description de votre startup</label>
                                 </div>
                                 <div class="form-floating my-4">
-                                    <input type="text" name="email" id="email"class="form-control" placeholder="Email">
-
-                                    <label for="Email">Email</label>
+                                    <input type="text" name="email1" id="email"class="form-control" placeholder="Email">
+                                    <span id="6"></span>
+                                    <label for="email1">Email</label>
                                 </div>
                                 <div class="form-floating my-4">
-                                    <input type="text" name="tel" id="tel"class="form-control" placeholder="Numéro téléphone">
-
-                                    <label for="Email">Numéro téléphone</label>
+                                    <input type="text" name="tel1" id="tel"class="form-control" placeholder="Numéro téléphone">
+                                    <span id="7"></span>
+                                    <label for="tel1">Numéro téléphone</label>
                                 </div>
                                 <div class="col-lg-5 col-6">
-    <button type="submit" class="form-control">Send</button>
-</div>
+    <button type="submit" class="form-control">Enregistrer</button>
+
+    </div>
                             </div>
                             </form>
                             </div>
@@ -188,10 +190,10 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
-                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a> need</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2023 <strong>I need</strong></p>
                         <br>
-                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
+                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">I need</a></p>
                     </div>
 
                     <div class="col-lg-5 col-8">

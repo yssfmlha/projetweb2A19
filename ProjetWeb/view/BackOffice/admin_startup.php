@@ -2,6 +2,7 @@
 include '../../controle/startupC.php' ;
 $startup= new startupC ();
 $affichage= $startup->afficherstartup();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,8 @@ $affichage= $startup->afficherstartup();
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -74,7 +77,7 @@ $affichage= $startup->afficherstartup();
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="admindon_startup.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Don Startups</a>
+                    <a href="adminprojets.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Projets</a>
                     <a href="admin_startup.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Nos Startups</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
@@ -102,9 +105,6 @@ $affichage= $startup->afficherstartup();
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -180,6 +180,10 @@ $affichage= $startup->afficherstartup();
                             <a href="#" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
+                    <form class="d-none d-md-flex ms-4" method="POST" action="research.php" >
+
+                    <input class="form-control border-0" type="search" placeholder="Search" name="nom" >
+                </form>
                 </div>
             </nav>
             <!-- Navbar End -->
@@ -190,10 +194,6 @@ $affichage= $startup->afficherstartup();
                 <div class="row g-4">
 
 
-
-
-
-  
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Nos startups</h6>
@@ -201,15 +201,15 @@ $affichage= $startup->afficherstartup();
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">id_startup</th>
+                                            <th scope="col">identifiant startup</th>
                                             <th scope="col">Nom startup</th>
-                                            <th scope="col">Domaine</th>
-                                            <th scope="col">Nom du fondateur</th>
-                                            <th scope="col">Prénom du fondateur</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">téléphone</th>
-                                            <th scope="col">Supprimer</th>
+                                            <th scope="col">Domaine startup</th>
+                                            <th scope="col">Nom  fondateur</th>
+                                            <th scope="col">Prénom fondateur</th>
+                                            <th scope="col">Description startup</th>
+                                            <th scope="col"> adresse email du fondateur</th>
+                                            <th scope="col"> numéro téléphone </th>
+                                            <th scope="col">Supprimer startup</th>
                                             <th scope="col">Mise a jour</th>
 
                                         </tr>
@@ -234,16 +234,20 @@ $affichage= $startup->afficherstartup();
     }?>
                                     </tbody>
                                 </table>
-                            </div>
+</div>
+<?php
+                            $startupC=new startupC();
+                            $GAB= $startupC->statistiqueDomaine();
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Table End -->
 
-
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
+
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
@@ -264,7 +268,6 @@ $affichage= $startup->afficherstartup();
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
