@@ -59,7 +59,7 @@ $tab = $c->listParticipants();
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="BackParticipant.php" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -196,8 +196,25 @@ $tab = $c->listParticipants();
                         <a href="">Show All</a>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <form class="d-none d-md-flex ms-4" action="ChercherParticipant.php" method="POST" onsubmit="verifierDecimal('Cher_Mat');">
-                            <input class="form-control border-0 flex-grow-1" type="search" placeholder="Search..." id="Cher_Mat" name="Matricule" style="margin-left: 10px; margin-right: 10px; padding: 10px;">
+                        <form class="d-none d-md-flex ms-4" action="ChercherParticipant.php" method="POST" onsubmit="handleFormSubmit();">
+                            <div class="search-wrapper">
+                                <button type="button" onclick="toggleSearchType()" id="toggleButton" class="btn btn-primary" style="position: absolute; left: 308; padding: 14px; border: 1px solid #ced4da; border-radius: 10px 0 0 10px ; margin-bottom : 10px; box-shadow: none;">
+                                    <i class="bi bi-search" style="line-height: inherit;"></i>
+                                </button>
+                                <div id="inputWrapper" class="search-select-wrapper" style="display: flex;">
+                                    <input class="form-control border-0 flex-grow-1 search-input" type="search" placeholder="Search..." id="Cher_KEY" name="Cher_KEY" style=" margin-bottom : 10px; margin-left: 30px ; box-shadow: none;" >
+                                </div>
+                                <div id="selectWrapper" class="search-select-wrapper">
+                                    <select class="form-select search-select" id="searchColumn" size="1" name="searchColumn" style="width: 114%; border: none; margin-left: 30px ; margin-bottom : 10px; box-shadow: none;" onchange="toggleSearchType(); updateInputType();" onfocus="hideButton(); this.size=2;" onblur="showButton(); this.size=1;" onchange='this.size=1; this.blur();'>
+                                        <option value="CIN">CIN</option>
+                                        <option value="Mat_Event">Matricule Event</option>
+                                        <option value="NBTKT_Part">NB Ticket</option>
+                                        <option value="DateA_Part">Date Achat</option>
+                                    </select>
+                                </div>
+                                <h6 id="validationMessage" style="position:absolute; color : red ; font-size: 12px; margin-top: 65px; margin-right : 100px;"></h6>
+                                <button type="Submit" class="btn btn-primary" style="display:none;">-></button>
+                            </div>
                         </form>
                     </div>
                     <h6 class="mb-0"  id="resultatMessage"></h6>
@@ -209,6 +226,7 @@ $tab = $c->listParticipants();
                                     <th onclick="sortTable(1)" class="Clicked" scope="col">Matricule Evenement</th>
                                     <th onclick="sortTable(2)" class="Clicked" scope="col">Ticket</th>
                                     <th onclick="sortTable(2)" class="Clicked" scope="col">Date d'Achat</th>
+                                    <th class="not_Clicked" scope="col">QR Code</th>
                                     <th class="not_Clicked"><center>Actions</center></th>
                                 </tr>
                             </thead>
@@ -221,6 +239,7 @@ $tab = $c->listParticipants();
                                         <td ><?php echo $Participant["id_EventPar"];?></td>
                                         <td ><?php echo $Participant["Nbtkt_Participant"];?></td> 
                                         <td ><?php echo formatDateTime($Participant["DateP_Achat"]);?></td> 
+                                        <td><center><img src="<?php echo $Participant["QrCode_Participant"];?>" width="80" height="80"></center></td>
                                         <td><center><a class="btn btn-sm btn-primary" href = "DelParticipant.php?Matricule=<?php echo $Participant["id_Participant"];?>">Supprimer</a></center></td>
                                     </tr>
                                 <?php
@@ -296,6 +315,116 @@ $tab = $c->listParticipants();
         }
     }
     </script>
+    <style>
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .search-input-wrapper,
+    .search-select-wrapper {
+        display: none;
+    }
+
+    .search-input,
+    .search-select {
+        padding: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: auto;
+    }
+
+    .search-validation-message {
+        position: absolute;
+        color: red;
+        font-size: 12px;
+        margin-top: 50px;
+        margin-right: 50px;
+    }
+    #toggleButton {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #searchColumn:focus ~ #toggleButton {
+        opacity: 0;
+    }
+
+    #searchColumn:blur ~ #toggleButton {
+        opacity: 1;
+    }
+    input[type='date'] {
+        padding-left : 70px ;
+        width: 100%;
+        box-sizing: border-box; 
+    }
+
+    input[type='search'] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+    <script>
+    function toggleSearchType() 
+    {
+        var inputWrapper = document.getElementById('inputWrapper');
+        var selectWrapper = document.getElementById('selectWrapper');
+        var toggleButton = document.getElementById('toggleButton');
+        if (inputWrapper.style.display === 'none') 
+        {
+            inputWrapper.style.display = 'flex';
+            selectWrapper.style.display = 'none';
+            toggleButton.innerHTML = '<i class="bi bi-search" style="line-height: inherit;"></i>';
+        } 
+        else 
+        {
+            inputWrapper.style.display = 'none';
+            selectWrapper.style.display = 'inline-block';
+            toggleButton.innerHTML = '<i class="bi bi-arrow-left-right" style="line-height: inherit; "></i>';
+        }
+    }
+    function hideButton()
+    {
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.style.opacity = '0';
+    }
+    function showButton()
+    {
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.style.opacity = '1';
+    }
+
+    function handleFormSubmit() 
+    {
+        var selectedOption = document.getElementById('searchColumn').value;
+        if (selectedOption === 'CIN') 
+        {
+            verifierDecimal('Cher_KEY','validationMessage');
+        }
+        else if (selectedOption === 'Mat_Event') 
+        {
+            verifierDecimal('Cher_KEY','validationMessage');
+        } 
+        else if(selectedOption === 'NBTKT_Part'){
+            verifierDecimal("Cher_KEY","validationMessage");
+        }
+        else{
+            validateDate("Cher_KEY","validationMessage");
+        }
+    }
+    function updateInputType() 
+    {
+        var selectedOption = document.getElementById('searchColumn').value;
+        var inputElement = document.getElementById('Cher_KEY');
+        if (selectedOption === 'DateA_Part') 
+        {
+            inputElement.type = 'date';
+        } 
+        else 
+        {
+            inputElement.type = 'search';
+        }
+    }
+</script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/chart/chart.min.js"></script>

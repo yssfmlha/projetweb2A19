@@ -3,6 +3,13 @@ require '../Controller/EventC.php' ;
 require '../Controller/ParticipantC.php' ;
 require '../Model/Event.php' ;
 require '../Model/Participant.php' ;
+require_once '../phpqrcode/qrlib.php';
+function generateQRCode($qrtext, $path)
+{
+    $qrcodeImagePath = $path . time() . ".png";
+    QRcode::png($qrtext, $qrcodeImagePath, 'H', 4, 4);
+    return $qrcodeImagePath;
+}  
 function getDayName($dateString) {
     try 
     {
@@ -15,7 +22,7 @@ function getDayName($dateString) {
     }
 }
 $c = new EventC () ;
-$tab = $c->CherEvent($_GET['Matricule']);
+$tab = $c->CherEvent_Mat($_GET['Matricule']);
 $quantity = isset($_POST['quantity']) ? $_POST['quantity'] : 0;
 foreach($tab as $Event )
 {
@@ -23,9 +30,9 @@ foreach($tab as $Event )
     $Event["Price_Event"], $Event["NBTKT_Event"] - $quantity );
 }
 $c->UpdEvent($Evt,$_GET['Matricule']);
-$tab = $c->CherEvent($_GET['Matricule']);
+$tab = $c->CherEvent_Mat($_GET['Matricule']);
 $p= new ParticipantC();
-$Prt= new Participant( NULL , $_GET['Matricule'] , $quantity , date('Y-m-d H:i:s'));
+$Prt = new Participant(NULL,$_GET['Matricule'],$quantity,date('Y-m-d H:i:s'),generateQRCode('IDP: , NBTKT:' . $quantity, '../Qrimages/'));
 $p->AddParticipant($Prt) ;
 ?>
 <!DOCTYPE html>
@@ -144,7 +151,7 @@ https://www.tooplate.com/view/2125-artxibition
 
                         <div class="d-none d-lg-block">
                             <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                        <a href="panier-event.php" class="bi-bag custom-icon"></a>
                 </div>
             </div>
         </div>
@@ -213,7 +220,7 @@ https://www.tooplate.com/view/2125-artxibition
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <h4 class="text-white mb-3"><a href="myindex.php">Little</a> Fashion</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>

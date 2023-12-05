@@ -1,10 +1,5 @@
 <?php
 include '../Controller/EventC.php' ;
-function formatDate($inputDate) {//ask!!
-    $dateTime = DateTime::createFromFormat('d/m/y', $inputDate);
-    $formattedDate = $dateTime->format('M d, Y');
-    return $formattedDate;
-}
 function getFormattedDate($dateString) {
     $date = new DateTime($dateString);
     $dayName = $date->format('l'); 
@@ -141,8 +136,8 @@ https://www.tooplate.com/view/2125-artxibition
 
                         <div class="d-none d-lg-block">
                             <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
-                </div>
+                            <a href="panier-event.php" class="bi-bag custom-icon"></a>
+                        </div>
             </div>
         </div>
     </nav>

@@ -1,9 +1,39 @@
 <?php
 include '../Controller/EventC.php' ;
+function getFormattedDate($dateString) {
+    $date = new DateTime($dateString);
+    $dayOfMonth = $date->format('d');
+    $monthName = $date->format('M');
+    $year = $date->format('Y');
+    
+    return "$dayOfMonth $monthName $year";
+}
 $c = new EventC () ;
-$tab = $c->CherEvent($_POST['Matricule']);
+switch ($_POST['searchColumn']) {
+    case 'Mat_Event':
+        $tab = $c->CherEvent_Mat($_POST['Cher_KEY']);
+    break;
+    case 'Nom_Event':
+        $tab = $c->CherEvent_Nom($_POST['Cher_KEY']);
+    break;
+    case 'Adresse_Event':
+        $tab = $c->CherEvent_Adr($_POST['Cher_KEY']);
+    break;
+    case 'DateD_Event':
+        $tab = $c->CherEvent_DD($_POST['Cher_KEY']);
+    break;
+    case 'DateF_Event':
+        $tab = $c->CherEvent_DF($_POST['Cher_KEY']);
+    break;
+    case 'NBTKT_Event':
+        $tab = $c->CherEvent_NB($_POST['Cher_KEY']);
+    break;
+    case 'Price_Event':
+        $tab = $c->CherEvent_Pr($_POST['Cher_KEY']);
+    break;
+}
 if($tab == [])
-    header('Location:BackEvent.php') ;
+   header('Location:BackEvent.php') ;
 ?>
 <html lang="en">
 <head>
@@ -215,8 +245,8 @@ if($tab == [])
                                         <td><?php echo $Event["Mat_Event"];?></td>
                                         <td><?php echo $Event["Nom_Event"];?></td>
                                         <td><?php echo $Event["Adresse_Event"];?></td>
-                                        <td><?php echo $Event["Date_Event"];?></td>
-                                        <td><?php echo $Event["DateF_Event"];?></td>
+                                        <td><?php echo getFormattedDate($Event["Date_Event"]);?></td>
+                                        <td><?php echo getFormattedDate($Event["DateF_Event"]);?></td>
                                         <td><?php echo $Event["About_Event"];?></td>
                                         <td><?php echo $Event["Price_Event"];?></td>
                                         <td><?php echo $Event["NBTKT_Event"];?></td>

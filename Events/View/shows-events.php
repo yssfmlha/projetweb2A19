@@ -121,7 +121,7 @@ $tab = $c->listEvents();
 
                         <div class="d-none d-lg-block">
                             <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                        <a href="panier-event.php" class="bi-bag custom-icon"></a>
                 </div>
             </div>
         </div>
@@ -170,15 +170,15 @@ $tab = $c->listEvents();
                         </div>
                     </div>
                 </div>
-            <?php $i++; } }?>
+            <?php  } $i++; }?>
                 <div class="col-lg-12">
                     <div class="pagination">
                         <ul>
                             <?php
                                 $numPages = ceil( $i / 6 ); 
                                 $visiblePages = min($numPages, 3);
-                                if ($numPages > 1) {
-                                    echo '<li><a href="#" onclick="toggleContent(\'content-'. $numPages .'\')">Prev</a></li>';                                    
+                                if ($visiblePages > 1) {
+                                    echo '<li><a href="#" onclick="toggleContent(\'content-'. $visiblePages .'\')">Prev</a></li>';                                    
                                     for ($page = 1; $page <= $visiblePages; $page++) {
                                         $activeClass = ($page == 1) ? 'class="active"' : '';
                                         echo "<li onclick=\"toggleContent('content-$page')\" $activeClass><a href='#'>$page</a></li>";
@@ -230,14 +230,15 @@ $tab = $c->listEvents();
                             <?php
                                 $numPages = ceil( $i / 6 ); 
                                 $visiblePages = min($numPages, 3);
-                                if ($numPages > 2) {
-                                    echo '<li><a href="#" onclick="toggleContent(\'content-1\')">Next</a></li>';                                  
-                                    for ($page = 1; $page <= $visiblePages; $page++) {
-                                        $activeClass = ($page == 1) ? 'class="active"' : '';
-                                        echo "<li onclick=\"toggleContent('content-$page')\" $activeClass><a href='#'>$page</a></li>";
-                                    }
-                                    echo '<li><a href="#" onclick="toggleContent(\'content-'. $numPages .'\')">Prev</a></li>';  
-                                }
+                                echo '<li><a href="#" onclick="toggleContent(\'content-1\')">Prev</a></li>';                                  
+                                for ($page = 1; $page <= $visiblePages; $page++) {
+                                    $activeClass = ($page == 2) ? 'class="active"' : '';
+                                    echo "<li onclick=\"toggleContent('content-$page')\" $activeClass><a href='#'>$page</a></li>";
+                                } 
+                                if ($visiblePages > 2)
+                                    echo '<li><a href="#" onclick="toggleContent(\'content-'. $numPages .'\')">Next</a></li>';
+                                else 
+                                    echo '<li><a href="#" onclick="toggleContent(\'content-1\')">Next</a></li>';  
                             ?>
                         </ul>
                     </div>
@@ -284,7 +285,7 @@ $tab = $c->listEvents();
                                 $visiblePages = min($numPages, 3);
                                 echo '<li><a href="#" onclick="toggleContent(\'content-2\')">Next</a></li>';                                  
                                 for ($page = 1; $page <= $visiblePages; $page++) {
-                                    $activeClass = ($page == 1) ? 'class="active"' : '';
+                                    $activeClass = ($page == 3) ? 'class="active"' : '';
                                     echo "<li onclick=\"toggleContent('content-$page')\" $activeClass><a href='#'>$page</a></li>";
                                 }
                                 echo '<li><a href="#" onclick="toggleContent(\'content-1\')">Prev</a></li>';  

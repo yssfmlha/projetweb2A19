@@ -49,8 +49,6 @@ $tab = $c->listEvents();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha256-gU9p0o8i40mE6tGzil5Z7uF7tVXtK1egylkU4QcU+8M=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- My Js -->
-    <script src="Event.js"></script>
 </head>
 
 <body>
@@ -67,7 +65,7 @@ $tab = $c->listEvents();
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="BackEvent.php" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -268,7 +266,6 @@ $tab = $c->listEvents();
                 </div>
             </div>
             <!-- Sale & Revenue End -->
-
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
@@ -276,9 +273,29 @@ $tab = $c->listEvents();
                         <a href="">Show All</a>
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <a class="btn btn-primary" href="addEvent.php" style="position:relative; margin: 10px; margin-right: 10px;">Ajouter Un Evenement</a>
-                        <form class="d-none d-md-flex ms-4" action="ChercherEvent.php" method="POST" onsubmit="verifierDecimal('Cher_Mat');">
-                            <input class="form-control border-0 flex-grow-1" type="search" placeholder="Search..." id="Cher_Mat" name="Matricule" style="margin-left: 10px; margin-right: 10px; padding: 10px;">
+                        <a class="btn btn-primary" href="addEvent.php" style="position:relative; margin: 10px; margin-right: 10px; margin-bottom : 50px;">Ajouter Un Evenement</a>
+                        <form class="d-none d-md-flex ms-4" action="ChercherEvent.php" method="POST" onsubmit="handleFormSubmit();">
+                            <div class="search-wrapper">
+                                <button type="button" onclick="toggleSearchType()" id="toggleButton" class="btn btn-primary" style="position: absolute; right: 248; padding: 14px; border: 1px solid #ced4da; border-radius: 10px 0 0 10px ; margin-bottom : 20px; box-shadow: none;">
+                                    <i class="bi bi-search" style="line-height: inherit;"></i>
+                                </button>
+                                <div id="inputWrapper" class="search-select-wrapper" style="display: flex;">
+                                    <input class="form-control border-0 flex-grow-1 search-input" type="search" placeholder="Search..." id="Cher_KEY" name="Cher_KEY" style=" margin-bottom : 20px; box-shadow: none;" >
+                                </div>
+                                <div id="selectWrapper" class="search-select-wrapper">
+                                    <select class="form-select search-select" id="searchColumn" size="1" name="searchColumn" style="width: 90%; border: none; margin-right: 100px ; margin-bottom : 20px; box-shadow: none;" onchange="toggleSearchType(); updateInputType();" onfocus="hideButton(); this.size=2;" onblur="showButton(); this.size=1;" onchange='this.size=1; this.blur();'>
+                                        <option value="Mat_Event">Matricule</option>
+                                        <option value="Nom_Event">Nom</option>
+                                        <option value="Adresse_Event">Lieu</option>
+                                        <option value="DateD_Event">Date Debut</option>
+                                        <option value="DateF_Event">Date Fin</option>
+                                        <option value="NBTKT_Event">Attendance</option>
+                                        <option value="Price_Event">Prix</option>
+                                    </select>
+                                </div>
+                                <h6 id="validationMessage" style="position:absolute; color : red ; font-size: 12px; margin-top: 80px; margin-right : 50px;"></h6>
+                                <button type="Submit" class="btn btn-primary" style="display:none;">-></button>
+                            </div>
                         </form>
                     </div>
                     <h6 class="mb-0"  id="resultatMessage"></h6>
@@ -321,7 +338,6 @@ $tab = $c->listEvents();
                 </div>
             </div>
             <!-- Table End -->
-
 
             <!-- Footer Start -->
             <div class="container-fluid pt-4 px-4">
@@ -406,6 +422,9 @@ $tab = $c->listEvents();
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 
+    <!-- My Js -->
+    <script src="Event.js"></script>
+
 <?php
     $data = []; 
     $dataX = [];
@@ -453,7 +472,121 @@ $tab = $c->listEvents();
         }
     });
 </script>
+<style>
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+    }
 
+    .search-input-wrapper,
+    .search-select-wrapper {
+        display: none;
+    }
+
+    .search-input,
+    .search-select {
+        padding: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: auto;
+    }
+
+    .search-validation-message {
+        position: absolute;
+        color: red;
+        font-size: 12px;
+        margin-top: 50px;
+        margin-right: 50px;
+    }
+    #toggleButton {
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    #searchColumn:focus ~ #toggleButton {
+        opacity: 0;
+    }
+
+    #searchColumn:blur ~ #toggleButton {
+        opacity: 1;
+    }
+    input[type='date'] {
+        padding-left : 70px ;
+        width: 100%;
+        box-sizing: border-box; 
+    }
+
+    input[type='search'] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+</style>
+<script>
+    function toggleSearchType() 
+    {
+        var inputWrapper = document.getElementById('inputWrapper');
+        var selectWrapper = document.getElementById('selectWrapper');
+        var toggleButton = document.getElementById('toggleButton');
+        if (inputWrapper.style.display === 'none') 
+        {
+            inputWrapper.style.display = 'flex';
+            selectWrapper.style.display = 'none';
+            toggleButton.innerHTML = '<i class="bi bi-search" style="line-height: inherit;"></i>';
+        } 
+        else 
+        {
+            inputWrapper.style.display = 'none';
+            selectWrapper.style.display = 'inline-block';
+            toggleButton.innerHTML = '<i class="bi bi-arrow-left-right" style="line-height: inherit; "></i>';
+        }
+    }
+    function hideButton()
+    {
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.style.opacity = '0';
+    }
+    function showButton()
+    {
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.style.opacity = '1';
+    }
+
+    function handleFormSubmit() 
+    {
+        var selectedOption = document.getElementById('searchColumn').value;
+        if (selectedOption === 'Mat_Event') 
+        {
+            verifierDecimal('Cher_KEY','validationMessage');
+        } 
+        else if(selectedOption === 'Nom_Event'){
+            validerEtAfficher("Cher_KEY","validationMessage");
+        }
+        else if(selectedOption === 'DateD_Event'){
+            validateDate("Cher_KEY","validationMessage");
+        }
+        else if(selectedOption === 'DateF_Event'){
+            validateDate("Cher_KEY","validationMessage");
+        }
+        else if(selectedOption === 'NBTKT_Event'){
+            verifierDecimal("Cher_KEY","validationMessage");
+        }
+        else{
+            verifierDecimal("Cher_KEY","validationMessage");
+        }
+    }
+    function updateInputType() 
+    {
+        var selectedOption = document.getElementById('searchColumn').value;
+        var inputElement = document.getElementById('Cher_KEY');
+        if (selectedOption === 'DateD_Event' || selectedOption === 'DateF_Event') 
+        {
+            inputElement.type = 'date';
+        } 
+        else 
+        {
+            inputElement.type = 'search';
+        }
+    }
+</script>
 </body>
 
 </html>

@@ -1,9 +1,26 @@
 <?php
 include '../Controller/ParticipantC.php' ;
+function formatDateTime($dateTimeString) {
+    $dateTime = new DateTime($dateTimeString);
+    return $dateTime->format('M d, Y H:i:s');
+}
 $c = new ParticipantC () ;
-$tab = $c->CherPaticipant($_POST['Matricule']);
-if($tab == [])
-    header('Location:BackParticipant.php') ;
+switch ($_POST['searchColumn']) {
+    case 'CIN':
+        $tab = $c->CherPaticipant($_POST['Cher_KEY']);
+    break;
+    case 'Mat_Event':
+        $tab = $c->CherPaticipant_MatE($_POST['Cher_KEY']);
+    break;
+    case 'NBTKT_Part':
+        $tab = $c->CherPaticipant_NT($_POST['Cher_KEY']);
+    break;
+    case 'DateA_Part':
+        $tab = $c->CherPaticipant_DA($_POST['Cher_KEY']);
+    break;
+}
+//if($tab == [])
+  //  header('Location:BackParticipant.php') ;
 ?>
 <html lang="en">
 <head>
@@ -53,7 +70,7 @@ if($tab == [])
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="BackEvent.php" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -191,14 +208,16 @@ if($tab == [])
                     </div>
                     <div class="table-responsive">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <a class="btn btn-primary" href="BackEvent.php" style="position:relative; margin: 10px; margin-right: 10px;">Revenir</a>
+                            <a class="btn btn-primary" href="BackParticipant.php" style="position:relative; margin: 10px; margin-right: 10px;">Revenir</a>
                         </div>
                         <table class="table text-start align-middle table-bordered table-hover mb-0" id="myTable">
                         <thead>
                                 <tr>
-                                    <th onclick="sortTable(0)" class="Clicked" scope="col">CIN<span class="sort-arrow">
-                                    <th onclick="sortTable(1)" class="Clicked" scope="col">Matricule Evenement</th>
-                                    <th onclick="sortTable(2)" class="Clicked" scope="col">Ticket</th>
+                                    <th class="not_Clicked" scope="col">CIN<span class="sort-arrow">
+                                    <th class="not_Clicked" scope="col">Matricule Evenement</th>
+                                    <th class="not_Clicked" scope="col">Ticket</th>
+                                    <th class="not_Clicked" scope="col">Date d'Achat</th>
+                                    <th class="not_Clicked" scope="col">QR Code</th>
                                     <th class="not_Clicked"><center>Actions</center></th>
                                 </tr>
                             </thead>
@@ -209,7 +228,9 @@ if($tab == [])
                                     <tr>
                                         <td style="color:#009CFF; font-weight: 1000; "><?php echo $Participant["id_Participant"];?></td>
                                         <td ><?php echo $Participant["id_EventPar"];?></td>
-                                        <td ><?php echo $Participant["Nbtkt_Participant"];?></td> 
+                                        <td ><?php echo $Participant["Nbtkt_Participant"];?></td>
+                                        <td ><?php echo formatDateTime($Participant["DateP_Achat"]);?></td>  
+                                        <td><center><img src="<?php echo $Participant["QrCode_Participant"];?>" width="80" height="80"></center></td>
                                         <td><center><a class="btn btn-sm btn-primary" href = "DelParticipant.php?Matricule=<?php echo $Participant["id_Participant"];?>">Supprimer</a></center></td>
                                     </tr>
                                 <?php

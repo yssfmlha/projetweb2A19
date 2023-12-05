@@ -64,20 +64,7 @@
                 die("Erreur!!".$e->getMessage()) ;
             }
         }
-        public function CherEvent($Mat)
-        {
-            try
-            {
-                $db = Config::getConnexion();
-                $stmt = $db->prepare('SELECT * FROM Events WHERE Mat_Event = :Matricule');
-                $stmt->execute(['Matricule' => $Mat]);
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            }
-            catch(Exception $e)
-            {
-                die("Erreur!!".$e->getMessage()) ;
-            } 
-        }
+
         public function CherEarliestEvent()
         {
             try
@@ -91,6 +78,106 @@
             {
                 die("Erreur!!" . $e->getMessage());
             }
+        }
+
+        public function CherEvent_Mat($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Mat_Event = :Matricule ' );
+                $stmt->execute(['Matricule' => $Mat]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+
+        public function CherEvent_Nom($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Nom_Event LIKE :Matricule');
+                $stmt->execute(['Matricule' => '%' . $Mat . '%']);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+        public function CherEvent_Adr($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Adresse_Event LIKE :Matricule');
+                $stmt->execute(['Matricule' => '%' . $Mat . '%']);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+        public function CherEvent_DD($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Date_Event = :Matricule');
+                $stmt->execute(['Matricule' => $Mat ]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+        public function CherEvent_DF($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE DateF_Event = :Matricule');
+                $stmt->execute(['Matricule' => $Mat ]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+        public function CherEvent_NB($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE NBTKT_Event = :Matricule');
+                $stmt->execute(['Matricule' => $Mat]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
+        }
+        public function CherEvent_Pr($Mat)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Price_Event = :Matricule');
+                $stmt->execute(['Matricule' => $Mat ]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
         }
     }
 ?>

@@ -9,7 +9,14 @@ function verifierDecimal(InputId,MessageId) {
     else 
     {
       messageElement.innerText = "L'entrée n'est pas un nombre décimal non nul.";
-      event.preventDefault();
+      setTimeout(function () 
+      {
+            messageElement.innerText = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
     }
 }
 
@@ -25,7 +32,14 @@ function validerEtAfficher(InputId , MessageId)
   else 
   {
     messageElement.textContent = "La chaîne n'est pas valide.";
-    event.preventDefault();
+    setTimeout(function () 
+      {
+            messageElement.innerText = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
   }
 }
 function validerChaineAvecLettre(chaine) {
@@ -44,17 +58,41 @@ function validateDates() {
   if (!startDateInput.value.trim() || !endDateInput.value.trim()) {
     messageElement2.textContent = "Veuillez entrer à la fois la date de début et la date de fin.";
     messageElement3.textContent = "Veuillez entrer à la fois la date de début et la date de fin.";
-    event.preventDefault();
+    setTimeout(function () 
+      {
+            messageElement2.textContent = "";
+            messageElement3.textContent = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
   }
   else if (startDate >= endDate) {
       messageElement2.textContent = "La date de début doit être inférieure à la date de fin.";
       messageElement3.textContent = "La date de fin doit être postérieure à la date de début.";
-      event.preventDefault();
+      setTimeout(function () 
+      {
+            messageElement2.textContent = "";
+            messageElement3.textContent = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
   } 
   else if (startDate < today) {
       messageElement3.textContent = "Les dates doivent être postérieures à la date d'aujourd'hui.";
       messageElement2.textContent = "Les dates doivent être postérieures à la date d'aujourd'hui.";
-      event.preventDefault();
+      setTimeout(function () 
+      {
+            messageElement2.textContent = "";
+            messageElement3.textContent = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
   } 
   else {
       messageElement2.textContent = "";
@@ -73,12 +111,38 @@ function validerChaineNonVideEtAfficher() {
   else 
   {
     messageElementNonVide.textContent = "La chaîne est vide. Veuillez entrer une valeur.";
-    event.preventDefault();
+    setTimeout(function () 
+      {
+            messageElementNonVide.textContent = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
   }
 }
 
 function validerChaineNonVide(chaine) {
   return chaine.trim() !== "";
+}
+
+function validateDate(InputId , MessageId){
+  var DateInput = document.getElementById(InputId);
+  var messageElement = document.getElementById(MessageId);
+  var dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+  if (!dateFormat.test(DateInput.value.trim())) {
+    messageElement.textContent = "Veuillez entrer une date valide au format YYYY-MM-DD";
+    setTimeout(function () 
+      {
+            messageElement.textContent = "";
+            if (inputElement.form) {
+              inputElement.form.reset();
+          }
+      }, 2500);
+        event.preventDefault();
+  }
+  else {
+      messageElement.textContent = "";
+  }
 }
 
 function ValiderAdd(){
@@ -90,3 +154,4 @@ function ValiderAdd(){
   verifierDecimal('NBTKT','validationMessage6');
   validateDates();
 }
+

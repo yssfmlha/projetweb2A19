@@ -5,12 +5,14 @@
         public $MatEvt_Part ;
         public $NBTKT_Part ;
         public $DateP_Achat ;
-        public function __construct($Mat = NULL , $MatEvt , $Nbr_Tkt , $DateA)
+        public $QrC_Part ;
+        public function __construct($Mat = NULL , $MatEvt , $Nbr_Tkt , $DateA , $QRC)
         {
             $this->Mat_Part = $Mat ;
             $this->MatEvt_Part = $MatEvt ;
             $this->NBTKT_Part = $Nbr_Tkt ;
             $this->DateP_Achat = $DateA ;
+            $this->QrC_Part = $QRC ;
         }
 
         public function getMatP()
@@ -30,6 +32,10 @@
         public function getDateAP()
         {
             return $this->DateP_Achat ;
+        }
+        public function getQrC()
+        {
+            return $this->QrC_Part ;
         }
 
     } 
