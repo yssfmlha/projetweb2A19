@@ -4,11 +4,13 @@ class categorie
 {
     public $Id_categorie;
     public $nom_cat;
+    public $date;
 
-    public function __construct($Id_categorie = NULL, $nom_cat)
+    public function __construct($Id_categorie = NULL, $nom_cat,$date)
     {
         $this->Id_categorie = $Id_categorie;
         $this->nom_cat = $nom_cat;
+        $this->date= $date;
     }
 
     public function get_Id_categorie()
@@ -24,6 +26,15 @@ class categorie
     public function setnom_cat($n)
     {
         $this->nom_cat = $n;
+    }
+    public function getdate()
+    {
+        return $this->date;
+    }
+
+    public function setdate($d)
+    {
+        $this->date = $d;
     }
 }
 

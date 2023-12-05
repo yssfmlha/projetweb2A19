@@ -5,7 +5,7 @@ $tab = $c->listproduit();
 ?>
 <head>
     <meta charset="utf-8">
-    <title>DASHMIN - Bootstrap Admin Template</title>
+    <title>I need </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -52,7 +52,7 @@ $tab = $c->listproduit();
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -71,8 +71,8 @@ $tab = $c->listproduit();
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Tables</a>
+                    <a href="listcategorie.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Listcategorie</a>
+                    <a href="listproduit.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>ListProduit</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -168,8 +168,8 @@ $tab = $c->listproduit();
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <img class="rounded-circle me-lg-2" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Anis Bengaji</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -184,10 +184,10 @@ $tab = $c->listproduit();
 
             <!-- Table Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Produit</h6>
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-8"> <!-- Adjusted the width to col-xl-8 -->
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Produit</h6>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -196,6 +196,7 @@ $tab = $c->listproduit();
                                         <th scope="col">prix_produit</th>
                                         <th scope="col">quantité produit</th>
                                         <th scope="col">categorie</th>
+                                        <th scope="col">Action/admin </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -205,18 +206,20 @@ $tab = $c->listproduit();
                 <td><?= $produit['nom_produit']; ?></td>
                 <td><?= $produit['prix_produit']; ?></td>
                 <td><?= $produit['qte_produit']; ?></td>
-                <td><?= $produit['nom_produit']; ?></td>
+                <td><?=$produit['categorie_ref'];?></td>
+                
+               
 
                 <td align="center">
-                    <form method="POST" action="updateproduit.php">
-                        <input type="submit" name="updateproduit" value="updateproduit">
-                        <input type="hidden" value="<?= $produit['id_produit']; ?>" name="id_produit">
-                    </form>
-                </td>
-                <td>
-                    <a href="deleteproduit.php?id_produit=<?= $produit['id_produit']; ?>">Delete</a>
-                </td>
-            </tr>
+                    <a href="updateproduit.php?id_produit=<?= $produit['id_produit']; ?>">update</a>
+    
+</td>
+<td>
+    <a href="deleteproduit.php?id_produit=<?= $produit['id_produit']; ?>">Delete</a>
+</td>
+<td>
+    <a href="addproduit.php?id_produit=<?= $produit['id_produit']; ?>">Add</a>
+</td>
         <?php endforeach; ?>
                                 </tbody>
                             </table>

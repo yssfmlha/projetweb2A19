@@ -13,7 +13,8 @@ if (isset($_POST["nom_cat"])) {
     if (!empty($_POST['nom_cat'])) {
         $categorie = new categorie(
             null,
-            $_POST['nom_cat']
+            $_POST['nom_cat'],
+            date("Y/m/d")
         );
         $categorieC->addcategorie($categorie);
         header('Location: listcategorie.php');

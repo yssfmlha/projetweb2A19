@@ -44,7 +44,9 @@ class produitC
                 'nom_produit' => $produit->getnom_produit(),
                 'prix_produit' => $produit->getprix_produit(),
                 'qte_produit' => $produit->getqte_produit(),
-                'categorie_ref' => $produit->getcategorie_ref()
+                'categorie_ref' => $produit->getcategorie_ref(),
+              
+                
                 
             ]);
         } catch (Exception $e) {
@@ -75,7 +77,8 @@ class produitC
             'UPDATE produit SET 
                 nom_produit = :nom_produit, 
                 prix_produit = :prix_produit, 
-                qte_produit = :qte_produit 
+                qte_produit = :qte_produit,
+                categorie_ref=:categorie_ref
                 
             WHERE id_produit= :id_produit'
         );
@@ -84,7 +87,8 @@ class produitC
             'id_produit' => $id_produit,
             'nom_produit' => $produit->getnom_produit(),
             'prix_produit' => $produit->getprix_produit(),
-            'qte_produit' => $produit->getqte_produit()
+            'qte_produit' => $produit->getqte_produit(),
+            'categorie_ref'=>$produit->getcategorie_ref()
         ]);
 
         echo $query->rowCount() . " records UPDATED successfully <br>";

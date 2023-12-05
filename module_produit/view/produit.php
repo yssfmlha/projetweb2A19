@@ -1,7 +1,7 @@
 <?php
-require '../controller/categorieC.php';
-$c = new categorieC();
-$tab = $c->listcategorie();
+require '../controller/produitC.php';
+$c = new produitC();
+$tab = $c->listproduit();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,52 +18,8 @@ $tab = $c->listcategorie();
     <link rel="stylesheet" href="../css/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/slick.css"/>
     <link rel="stylesheet" href="../css/tooplate-little-fashion.css">
-    <style>
-        /* Add additional styling here */
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
 
-        header.site-header {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px;
-        }
-
-        section.products {
-            padding: 50px 0;
-        }
-
-        .product-thumb {
-            border: 1px solid #ddd;
-            padding: 15px;
-            background-color: #fff;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .product-thumb:hover {
-            transform: scale(1.05);
-        }
-
-        footer.site-footer {
-            background-color: #black;
-            color: #fff;
-            padding: 60px 60;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #007bff !important;
-        }
-    </style>
-</head>
-<body>
+    <body>
 
         <section class="preloader">
             <div class="spinner">
@@ -134,62 +90,39 @@ $tab = $c->listcategorie();
                     </div>
                 </div>
             </header>
+            <?php
+
+?>
 
             <section class="products section-padding">
-                <div class="container">
-                    <div class="row">
-                        
-                        <div class="col-12">
-                            <h2 class="mb-5">Categories</h2>
-                        </div>
-                        
-                        <?php foreach ($tab as $categorie) {  ?>
-
-<div class="col-lg-4 col-12 mb-3">
-    <div class="product-thumb">
-        <a href="products.php">
-            <img src="../images/vet/clothing.webp" class="img-fluid product-image" alt="">
-        </a>
-
-        <div class="product-info d-flex">
-            <div>
-                <h5 class="product-title mb-0">
-                    <a href="produit.php?categorie_ref=<?php echo ($categorie['Id_categorie'])?>" class="product-title-link"><?php echo $categorie['nom_categorie'];?></a>
-                </h5>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5">Produits</h2>
             </div>
+
+            <?php foreach ($tab as $produit) { ?>
+                <div class="col-lg-4 col-12 mb-3">
+                    <div class="product-container">
+                        <div class="product-thumb">
+                            <a href="products.php">
+                            <img src="<?php echo $produit['image_url']; ?>" alt="<?php echo $produit['nom_produit']; ?>">
+                                
+                            </a>
+                            <div class="product-info d-flex">
+                                <div>
+                                    <h5 class="product-title mb-0"><?php echo $produit['nom_produit']; ?></h5>
+                                    <p class="product-price"><?php echo $produit['prix_produit']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
-</div>
-
-<?php }?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-   
-</head>
-
-<body>
-
-    
-
-</body>
-
-</html>
-
-    
-    
-
-                        
-            
-        <footer class="site-footer">
+            </section>
+<footer class="site-footer">
             <div class="container">
                 <div class="row">
 
@@ -246,4 +179,3 @@ $tab = $c->listcategorie();
     <script src="../js/custom.js"></script>
 </body>
 </html>
-

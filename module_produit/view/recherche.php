@@ -1,50 +1,13 @@
-
 <?php
 
-include '../controller/produitC.php';
-include '../model/produit.php';
-$error = "";
 
-// create client
-$produit = null;
-// create an instance of the controller
-$produitC = new produitC();
-
-
-if (
-    isset($_POST["nom_produit"]) &&
-    isset($_POST["prix_produit"]) &&
-    isset($_POST["qte_produit"]) 
-   
-) {
-    if (
-        !empty($_POST['nom_produit']) &&
-        !empty($_POST["prix_produit"]) &&
-        !empty($_POST["qte_produit"]) 
-        
-    ) {
-        
-       
-        $produit = new produit(
-            null,
-            $_POST['nom_produit'],
-            $_POST['prix_produit'],
-            $_POST['qte_produit'],
-            $_POST['categorie_ref']
-           
-        );
-        
-        
-        $produitC->updateproduit($produit, $_GET['id_produit']);
-
-        header('Location: listproduit.php');
-    } else
-        $error = "Missing information";
-}
-
-
-
+include '../controller/categorieC.php';
+$c = new categorieC();
+$tab = $c->SearchProjet($_POST['recherche']);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>DASHMIN - Bootstrap Admin Template</title>
@@ -53,7 +16,7 @@ if (
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" href="favicon.ico" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,7 +57,7 @@ if (
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -141,9 +104,7 @@ if (
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
+                <a href="listcategorie.php">Revenir</a>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -210,8 +171,8 @@ if (
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <img class="rounded-circle me-lg-2" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Anis Bengaji</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -221,89 +182,73 @@ if (
                     </div>
                 </div>
             </nav>
+            <!-- Navbar End -->
 
 
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-8"> <!-- Adjusted the width to col-xl-8 -->
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Categories</h6>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Id_categorie</th>
+                                        <th scope="col">nom_categorie</th>
+                                        <th scope="col">action/admin</th>
+                                        <th scope="col">action/admin</th>
+                                        <th scope="col">action/admin</th>
+                                        <th scope="col">Latest Category Added</th>
+                                    </tr>
+                                </thead>
+                                <div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Categories</h6>
 
-
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Display</title>
-</head>
-
-<body>
-    <button><a href="listproduit.php">Back to list</a></button>
-    <hr>
-
-    <div id="error">
-        <?php echo $error; ?>
-    </div>
-
-    <?php
-    if (isset($_GET['id_produit'])) {
-        $produit = $produitC->showproduit($_GET['id_produit']);
-        
-    ?>
-
-        <form action="" method="POST">
-            <table>
+                <!-- Search Input -->
+                
+                                
+                                <tbody>
+                                    <?php
+                                    
+                                     foreach ($tab as $categorie) : 
+                                         ?>
+                                     
+                                     
             <tr>
-                    <td><label for="nom">Idproduit :</label></td>
-                    <td>
-                        <input type="text" id="id_produit" name="id_produit" value="<?php echo $_GET['id_produit'] ?>" disabled />
-                        <span id="erreurNom" style="color: red"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="nom">Nom :</label></td>
-                    <td>
-                        <input type="text" id="nom_produit" name="nom_produit" value="<?php echo $produit['nom_produit'] ?>" />
-                        <span id="erreurNom" style="color: red"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="prenom">prix :</label></td>
-                    <td>
-                        <input type="text" id="prix_produit" name="prix_produit" value="<?php echo $produit['prix_produit'] ?>" />
-                        <span id="erreurPrenom" style="color: red"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="email">qte :</label></td>
-                    <td>
-                        <input type="text" id="qte_produit" name="qte_produit" value="<?php echo $produit['qte_produit'] ?>" />
-                        <span id="erreurEmail" style="color: red"></span>
-                    </td>
-                </tr>
-                
-                    
-                    
-                        <input type="hidden" id="categorie_ref" name="categorie_ref" value="<?php echo $produit['categorie_ref'] ?>" />
-                        
-                    
+                <td><?php echo $categorie["Id_categorie"]; ?></td>
+                <td><?php echo $categorie["nom_categorie"]; ?></td>
+                <td><a href="deletecategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Delete</a></td>
+                <td><a href="updatecategorie.php?Id_categorie=<?php echo $categorie["Id_categorie"]; ?>">UPDATE</a></td>
+               
                 
                 
+            </tr>
+        <?php endforeach; ?>
+        <a href="addcategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Ajouter</a>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+            
+<?php 
 
 
-                <td>
-                    <input type="submit" value="Save" >
-                </td>
-                <td>
-                    <input type="reset" value="Reset">
-                </td>
-            </table>
 
-        </form>
-    <?php
-    }
-    ?>
-</body>
+?>
 
-<!-- Footer Start -->
-<div class="container-fluid pt-4 px-4">
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
                 <div class="bg-light rounded-top p-4">
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center text-sm-start">
@@ -339,7 +284,5 @@ if (
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 </body>
-
-</html>
 
 </html>

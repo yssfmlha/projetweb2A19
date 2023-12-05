@@ -58,9 +58,9 @@ class categorieC
             $pd = config::getConnexion() ;
             $pst = $pd->prepare(
                 'INSERT INTO categorie
-                    VALUES(NULL, :nom_cat)'
+                    VALUES(NULL, :nom_cat,:date)'
             ) ;
-            $pst->execute(['nom_cat' => $categorie->nom_cat]);
+            $pst->execute(['nom_cat' => $categorie->nom_cat,'date'=>$categorie->date]);
         }
         catch(Exception $e)
         {
@@ -98,5 +98,23 @@ public function updatecategorie($categorie, $Id_categorie)
     }
 }
 
+
+public function SearchProjet($Id_categorie)
+    {
+        try
+        {
+            $db = Config::getConnexion();
+            $stmt = $db->prepare('SELECT * FROM categorie WHERE Id_categorie = :Id_categorie');
+            $stmt->execute(['Id_categorie' => $Id_categorie]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch(Exception $e)
+        {
+            die("Erreur!!".$e->getMessage()) ;
+        } 
+    }
+
 }
+
+
 ?>

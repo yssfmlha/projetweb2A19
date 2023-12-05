@@ -1,6 +1,7 @@
 
 
 <?php
+
 include '../controller/categorieC.php';
 $c = new categorieC();
 $tab = $c->listcategorie();
@@ -16,7 +17,7 @@ $tab = $c->listcategorie();
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link rel="icon" href="favicon.ico" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +58,7 @@ $tab = $c->listcategorie();
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -76,8 +77,8 @@ $tab = $c->listcategorie();
                         </div>
                     </div>
                     <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Tables</a>
+                    <a href="listproduit.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>ListP</a>
+                    <a href="listcategorie.php" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>listcategorie</a>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -104,8 +105,8 @@ $tab = $c->listcategorie();
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
-                    <input class="form-control border-0" type="search" placeholder="Search">
+                <form class="d-none d-md-flex ms-4 "method='POST' action='recherche.php'>
+                    <input class="form-control border-0" type="search" placeholder="Search" name="recherche">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
@@ -173,8 +174,8 @@ $tab = $c->listcategorie();
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <img class="rounded-circle me-lg-2" src="img/anis.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Anis Bengaji</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
@@ -189,10 +190,10 @@ $tab = $c->listcategorie();
 
             <!-- Table Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Categories</h6>
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-8"> <!-- Adjusted the width to col-xl-8 -->
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Categories</h6>
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -200,6 +201,8 @@ $tab = $c->listcategorie();
                                         <th scope="col">nom_categorie</th>
                                         <th scope="col">action/admin</th>
                                         <th scope="col">action/admin</th>
+                                        <th scope="col">action/admin</th>
+                                        <th scope="col">Latest Category Added</th>
                                     </tr>
                                 </thead>
                                 <div class="container-fluid pt-4 px-4">
@@ -210,17 +213,25 @@ $tab = $c->listcategorie();
 
                 <!-- Search Input -->
                 <div class="mb-3">
-                    <label for="searchId" class="form-label">Search by ID:</label>
-                    <input type="text" class="form-control" id="searchId" oninput="searchCategoriesById()">
                 </div>
                                 
                                 <tbody>
-                                    <?php foreach ($tab as $categorie) : ?>
+                                    <?php
+                                    
+                                     foreach ($tab as $categorie) : 
+                                        ?>
+                                     
+                                     
             <tr>
                 <td><?php echo $categorie["Id_categorie"]; ?></td>
                 <td><?php echo $categorie["nom_categorie"]; ?></td>
                 <td><a href="deletecategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Delete</a></td>
                 <td><a href="updatecategorie.php?Id_categorie=<?php echo $categorie["Id_categorie"]; ?>">UPDATE</a></td>
+                <td><a href="addcategorie.php?Id_categorie=<?php echo $categorie['Id_categorie']; ?>">Ajouter</a></td>
+                <td><?php echo $categorie["date_ajout"];?></td>
+                
+                
+                
             </tr>
         <?php endforeach; ?>
                                 </tbody>
@@ -230,27 +241,15 @@ $tab = $c->listcategorie();
                 </div>
             </div>
             <!-- Table End -->
-            <script>
-    function searchCategoriesById() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("searchId");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("categoryTableBody");
-        tr = table.getElementsByTagName("tr");
+            
+<?php 
 
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>
+
+
+?>
+
+
+
 
 
             <!-- Footer Start -->
