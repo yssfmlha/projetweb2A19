@@ -1,5 +1,5 @@
 <?php   
-    include_once '../Opener.php' ;
+    include_once '../../Opener.php' ;
     class ParticipantC{
         public function listParticipants()
         {
@@ -13,6 +13,20 @@
             {
                 die("Erreur!!".$e->getMessage()) ;
             }
+        }
+        public function listParticipant($Mat , $MatP)
+        {
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM participant WHERE id_Participant =:Matricule AND id_EventPar =:MatP ');
+                $stmt->execute(['Matricule' => $Mat , 'MatP' => $MatP ]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            }    
         }
         public function delParticipant($id)
         {
@@ -36,10 +50,10 @@
             {
                 $pd = config::getConnexion() ;
                 $pst = $pd->prepare(
-                'INSERT INTO participant (id_EventPar, Nbtkt_Participant , DateP_Achat , QrCode_Participant )
-                    Values(:MatE ,:Nbtkt ,:DateP , :Code ) '
+                'INSERT INTO participant (id_Participant,id_EventPar, Nbtkt_Participant , DateP_Achat , QrCode_Participant )
+                    Values(:idP ,:MatE ,:Nbtkt ,:DateP , :Code ) '
                 ) ; 
-                $pst->execute(['MatE'=>$participant->getMatEP() , 'Nbtkt'=>$participant->getNBTKTP() , 'DateP'=>$participant->getDateAP() ,
+                $pst->execute(['idP'=>$participant->getMatP() ,'MatE'=>$participant->getMatEP() , 'Nbtkt'=>$participant->getNBTKTP() , 'DateP'=>$participant->getDateAP() ,
                                'Code'=>$participant->getQrC()] );  
             }
              catch(Exception $e)
@@ -48,21 +62,21 @@
             }
         }
 
-        public function UpdParticipant( $Nbtkt , $Mat )
+        public function UpdParticipant( $Nbtkt , $Mat , $MatE )
         {
             $pd = config::getConnexion() ;
-            $pst = $pd->prepare(
-            'UPDATE participant SET  Nbtkt_Participant = :NBTKT where id_Participant = :Matricule'
-            ) ;
+            $pst = $pd->prepare('UPDATE participant SET Nbtkt_Participant = Nbtkt_Participant + :NewQuantity 
+                WHERE id_Participant = :Matricule AND id_EventPar =:MatE ');
             try
             {
-                $pst->execute(['Matricule'=>$Mat ,'NBTKT'=>$Nbtkt]);  
+                $pst->execute(['Matricule'=>$Mat ,'NewQuantity'=>$Nbtkt , 'MatE'=>$MatE ]);  
             }
             catch(Exception $e)
             {
                 die("Erreur!!".$e->getMessage()) ;
             }
         }
+
         public function TotalSale($id)
         {
             $stmt = 'SELECT SUM(Nbtkt_Participant) AS totalTickets FROM participant WHERE id_EventPar = :id';
@@ -107,61 +121,81 @@
             }
             return $weekSales;
         }  
-    public function CherPaticipant($Mat)
-    {
-        try
+        public function CherPaticipant($Mat)
         {
-            $db = Config::getConnexion();
-            $stmt = $db->prepare('SELECT * FROM participant WHERE id_Participant LIKE :Matricule');
-            $stmt->execute(['Matricule' => '%' . $Mat . '%']);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM participant WHERE id_Participant LIKE :Matricule');
+                $stmt->execute(['Matricule' => '%' . $Mat . '%']);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            }    
         }
-        catch(Exception $e)
+        public function CherPaticipant_MatE($Mat)
         {
-            die("Erreur!!".$e->getMessage()) ;
-        } 
-    }
-    public function CherPaticipant_MatE($Mat)
-    {
-        try
-        {
-            $db = Config::getConnexion();
-            $stmt = $db->prepare('SELECT * FROM participant WHERE id_EventPar LIKE :Matricule');
-            $stmt->execute(['Matricule' => '%' . $Mat . '%']);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM participant WHERE id_EventPar LIKE :Matricule');
+                $stmt->execute(['Matricule' => '%' . $Mat . '%']);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
         }
-        catch(Exception $e)
+        public function CherPaticipant_NT($Mat)
         {
-            die("Erreur!!".$e->getMessage()) ;
-        } 
-    }
-    public function CherPaticipant_NT($Mat)
-    {
-        try
-        {
-            $db = Config::getConnexion();
-            $stmt = $db->prepare('SELECT * FROM participant WHERE Nbtkt_Participant =:Matricule');
-            $stmt->execute(['Matricule' => $Mat]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM participant WHERE Nbtkt_Participant =:Matricule');
+                $stmt->execute(['Matricule' => $Mat]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
         }
-        catch(Exception $e)
+        public function CherPaticipant_DA($Mat)
         {
-            die("Erreur!!".$e->getMessage()) ;
-        } 
-    }
-    public function CherPaticipant_DA($Mat)
-    {
-        try
-        {
-            $db = Config::getConnexion();
-            $stmt = $db->prepare('SELECT * FROM participant WHERE DateP_Achat >= :Matricule');
-            $stmt->execute(['Matricule' => $Mat]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            try
+            {
+                $db = Config::getConnexion();
+                $stmt = $db->prepare('SELECT * FROM participant WHERE DateP_Achat >= :Matricule');
+                $stmt->execute(['Matricule' => $Mat]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+            catch(Exception $e)
+            {
+                die("Erreur!!".$e->getMessage()) ;
+            } 
         }
-        catch(Exception $e)
+        public function getTopSalesEvents()
         {
-            die("Erreur!!".$e->getMessage()) ;
-        } 
-    }
+            $stmt = 'SELECT id_EventPar, SUM(Nbtkt_Participant) AS totalTickets 
+                     FROM participant 
+                     GROUP BY id_EventPar 
+                     ORDER BY totalTickets DESC 
+                     LIMIT 5';
+            $pdo = config::getConnexion();
+            $query = $pdo->prepare($stmt);
+            try
+            {
+                $query->execute();
+                $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            }
+            catch (Exception $e) 
+            {
+                die("Erreur!!" . $e->getMessage());
+            }
+        }
 }
 ?>

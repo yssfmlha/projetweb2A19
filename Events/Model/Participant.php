@@ -6,7 +6,7 @@
         public $NBTKT_Part ;
         public $DateP_Achat ;
         public $QrC_Part ;
-        public function __construct($Mat = NULL , $MatEvt , $Nbr_Tkt , $DateA , $QRC)
+        public function __construct($Mat , $MatEvt , $Nbr_Tkt , $DateA , $QRC)
         {
             $this->Mat_Part = $Mat ;
             $this->MatEvt_Part = $MatEvt ;

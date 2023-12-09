@@ -1,5 +1,5 @@
 <?php   
-    include '../Opener.php' ;
+    include '../../Opener.php' ;
     class EventC{
         public function listEvents()
         {
@@ -69,8 +69,10 @@
         {
             try
             {
+                $currentDate = date('Y-m-d');
                 $db = Config::getConnexion();
-                $stmt = $db->prepare('SELECT * FROM Events ORDER BY Date_Event LIMIT 1');
+                $stmt = $db->prepare('SELECT * FROM Events WHERE Date_Event >= :currentDate ORDER BY Date_Event LIMIT 1');
+                $stmt->bindValue(':currentDate', $currentDate);
                 $stmt->execute();
                 return $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -79,6 +81,7 @@
                 die("Erreur!!" . $e->getMessage());
             }
         }
+
 
         public function CherEvent_Mat($Mat)
         {
