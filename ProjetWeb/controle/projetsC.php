@@ -1,5 +1,5 @@
 <?php
-require "../../config.php";
+require_once  "../../config.php";
 class projetsC{
     public function afficherprojets(){
         $sql="SELECT * FROM postes";
@@ -104,6 +104,20 @@ class projetsC{
         try {
             $result = $db->query($sql);
             return $result->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die("Erreur!!" . $e->getMessage());
+        }
+    }
+    public function getProjectsByStartup($id_startup) {
+        $sql = "SELECT * FROM postes WHERE id_startup = :id_startup";
+        $db = config::getConnexion();
+        
+        try {
+            $query = $db->prepare($sql);
+            $query->bindParam(':id_startup', $id_startup, PDO::PARAM_INT);
+            $query->execute();
+    
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             die("Erreur!!" . $e->getMessage());
         }

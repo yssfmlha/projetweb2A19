@@ -23,4 +23,5 @@ die('Erreur: ' . $e->getMessage());
 return self::$pdo;
 }
 }
+
 ?>

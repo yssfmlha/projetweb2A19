@@ -1,8 +1,20 @@
 <?php
-include '../../controle/projetsC.php' ;
-$projets= new projetsC ();
-$affichage= $projets->afficherprojets();
-?>
+    include "../../controle/projetsC.php";
+    include "../../modele/projets.php";
+    $projetC=new projetsC();
+    if(isset($_POST["id_startup"])&&isset($_POST["Nom_projet"])&&isset($_POST["Description_projet"])&&isset($_POST["Date_Debut"]) 
+    &&isset($_POST["Date_Fin"])
+    &&isset($_POST["Statut_Projet"])){
+        
+        if(!empty($_POST["id_startup"])&&!empty($_POST["Nom_projet"])&&!empty($_POST["Description_projet"])&&!empty($_POST["Date_Debut"])
+        &&!empty($_POST["Date_Fin"]) &&!empty($_POST["Statut_Projet"])){
+            $projet=new projets(NULL,$_POST["id_startup"],$_POST["Nom_projet"],
+            $_POST["Description_projet"],$_POST["Date_Debut"],$_POST["Date_Fin"],$_POST["Statut_Projet"]);
+            $projetC->updateprojets($projet);
+            header("Location:VotreStartup.php");
+        }
+    }
+    ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,7 +24,7 @@ $affichage= $projets->afficherprojets();
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Tooplate's I need - Startup Page</title>
+        <title>Tooplate's I need - don_Startup Page</title>
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,10 +37,9 @@ $affichage= $projets->afficherprojets();
         <link href="css/bootstrap-icons.css" rel="stylesheet">
 
         <link rel="stylesheet" href="css/slick.css"/>
-        <link rel="stylesheet" href="table.css">   
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-        <script src=controle_saisie.js></script>
+        <script src="controle_saisie_projets.js"></script>
         
 <!--
 
@@ -56,7 +67,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>I</span>need</strong>
+                        <strong><span>I</span> need</strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -82,10 +93,6 @@ https://www.tooplate.com/view/2127-little-fashion
                             <li class="nav-item">
                                 <a class="nav-link active" href="userstartup.php">Startup</a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="userprojets.php">Projets</a>
-                            </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
@@ -103,8 +110,8 @@ https://www.tooplate.com/view/2127-little-fashion
 
                         <div class="col-lg-10 col-12 header-info">
                             <h1>
-                                <span class="d-block text-primary">Les projets de </span>
-                                <span class="d-block text-dark"> nos startups</span>
+                                <span class="d-block text-primary">Create </span>
+                                <span class="d-block text-dark">your project</span>
                             </h1>
                         </div>
                     </div>
@@ -118,33 +125,61 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="row">
                         
                         <div class="col-lg-6 col-12">
-<table border="2" align="center" width = "70%" >
-<tr>
-            <th>identifiant projet</th>
-            <th>identifiant startup</th>
-            <th>Nom du projet</th>
-        <th>Description du projet</th>
-        <th>Date de debut</th>
-            <th>Date de fin</th>
-            <th>Statut du projet</th>
-        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-    foreach($affichage as $projets )
-    {?>
-        <tr>
-            <td><?php echo $projets["id_projet"];?></td>
-            <td><?php echo $projets["id_startup"];?></td>
-            <td><?php echo $projets["Nom_projet"];?></td>
-            <td><?php echo $projets["Description_Projet"];?></td>
-            <td><?php echo $projets["Date_Debut"];?></td>
-            <td><?php echo $projets["Date_Fin"];?></td>
-            <td><?php echo $projets["Statut_Projet"];?></td>
-        </tr>
-    <?php
-    }?>
-</table>
+                            <h2 class="mb-4">Let's <span>begin</span></h2>
+
+                            <form class="contact-form me-lg-5 pe-lg-3" role="form" onsubmit="return GAB();" method="POST">
+
+                                <div class="form-floating">
+                                <select name="id_startup" id="id_startup" class="form-control">
+                                <?php
+                                $projetC = new projetsC();
+                                $startupOptions = $projetC->getStartupOptions();
+                                foreach ($startupOptions as $startup) {
+                                    echo "<option value='" . $startup["id_startup"] . "'>" . $startup["Nom"] . " (ID: " . $startup["id_startup"] . ")</option>";
+                                }
+                                ?>
+                                </select>
+                                <span id="0"></span>
+                                <label for="id_startup">Nom du startup</label>
+                                </div>
+
+                                <div class="form-floating my-4">
+                                    <input type="text" name="Nom_projet" id="Nom_projet" class="form-control" placeholder="Nom_projet">
+                                    <span id="1"></span>
+                                    <label for="Nom_projet">Nom du projet</label>
+                                </div>
+                                
+                                <div class="form-floating my-4">
+                                    <textarea type="text" name="Description_projet" id="Description_projet"class="form-control" placeholder="Description_projet" style="height: 120px"></textarea>
+                                    <span id="2"></span>
+                                    <label for="Description_projet">Description du projet</label>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                <input type="date" name="Date_Debut" id="Date_Debut"class="form-control" placeholder="Date_Debut">
+                                <span id="3"></span>
+                                    <label for="Date_Debut">Date debut du projet</label>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                <input type="date" name="Date_Fin" id="Date_fin" class="form-control" placeholder="Date_Fin">
+                                <span id="4"></span>
+                                    <label for="Date_Fin">Date fin du projet</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                <input type="text" name="Statut_Projet" id="Statut_Projet"class="form-control" placeholder="Statut_Projet">
+                                <span id="5"></span>
+                                    <label for="Statut_Projet">Statut du projet</label>
+                                </div>
+                                <div class="col-lg-5 col-6">
+                                    <button type="submit" class="form-control">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+
+                                
+
+                                
 
                             </div>
                         </div>
@@ -159,10 +194,10 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">I </a>need</h4>
-                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2023 <strong>I need</strong></p>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a>need</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>I need</strong></p>
                         <br>
-                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">I need</a></p>
+                        <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
                     </div>
 
                     <div class="col-lg-5 col-8">
@@ -175,9 +210,9 @@ https://www.tooplate.com/view/2127-little-fashion
 
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
 
-                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Don Startup</a></li>
 
-                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Contact</a></li>
+                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Startup</a></li>
                         </ul>
                     </div>
 

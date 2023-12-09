@@ -1,8 +1,20 @@
 <?php
-include '../../controle/startupC.php' ;
-$startup= new startupC ();
-$affichage= $startup->afficherstartup();
-?>
+    require "../../controle/startupC.php";
+    require "../../modele/startup.php";
+    $startupC=new startupC();
+    if(isset($_POST["Nom1"])&&isset($_POST["domaine1"])&&isset($_POST["nom_f1"])&&isset($_POST["prenom_f1"]) &&isset($_POST["description1"])
+    &&isset($_POST["email1"])  &&isset($_POST["tel1"]) ){
+        if(!empty($_POST["Nom1"])&&!empty($_POST["domaine1"])&&!empty($_POST["nom_f1"])&&!empty($_POST["prenom_f1"])
+        &&!empty($_POST["description1"]) &&!empty($_POST["email1"])&&!empty($_POST["tel1"])){
+
+            $startup=new startup(NULL,$_POST["Nom1"],$_POST["domaine1"],
+            $_POST["nom_f1"],$_POST["prenom_f1"],$_POST["description1"],$_POST["email1"],$_POST["tel1"]);
+            $startupC->updatestartup($startup,$_GET['idd']);
+            header("Location:VotreStartup.php");
+            
+        }
+    }
+    ?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -23,12 +35,11 @@ $affichage= $startup->afficherstartup();
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap-icons.css" rel="stylesheet">
-        <link rel="stylesheet" href="table.css">  
 
         <link rel="stylesheet" href="css/slick.css"/>
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-        <script src=controle_saisie.js></script>
+        <script src="controle_saisie_startup.js"></script>
         
 <!--
 
@@ -103,8 +114,8 @@ https://www.tooplate.com/view/2127-little-fashion
 
                         <div class="col-lg-10 col-12 header-info">
                             <h1>
-                                <span class="d-block text-primary">Nos</span>
-                                <span class="d-block text-dark">startups</span>
+                                <span class="d-block text-primary">Create your</span>
+                                <span class="d-block text-dark">startup with us</span>
                             </h1>
                         </div>
                     </div>
@@ -118,34 +129,54 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="row">
                         
                         <div class="col-lg-6 col-12">
-<table border="2" align="center" width = "70%" >
-    <tr>
-    <th>id_startup</th>
-    <th>Nom_startup</th>
-    <th>Domaine</th>
-    <th>Nom_fondateur</th>
-    <th>Prénom_fondateur</th>
-    <th>Description</th>
-    <th>Email</th>
-    <th>telephone</th>
-    </tr>
-    <?php
-    foreach($affichage as $startup )
-    {?>
-        <tr>
-            <td><?php echo $startup["id_startup"];?></td>
-            <td><?php echo $startup["Nom"];?></td>
-            <td><?php echo $startup["domaine"];?></td>
-            <td><?php echo $startup["nom_f"];?></td>
-            <td><?php echo $startup["prenom"];?></td>
-            <td><?php echo $startup["de"];?></td>
-            <td><?php echo $startup["email"];?></td>
-            <td><?php echo $startup["telephone"];?></td>
-        </tr>
-    <?php
-    }?>
-</table>
+                            <h2 class="mb-4">Let's <span>begin</span></h2>
 
+                            <form class="contact-form me-lg-5 pe-lg-3" role="form" method="POST" onsubmit="return ISR();">
+
+                                <div class="form-floating">
+                                    <input type="text" name="Nom1" id="Nom" class="form-control" placeholder="Nom du startup">
+                                    <span id="1"></span>
+                                    <label for="Nom1">Nom startup</label>
+                                </div>
+
+                                <div class="form-floating my-4">
+                                    <input type="text" name="domaine1" id="domaine"class="form-control" placeholder="Domaine" >
+                                    <span id="2"></span>
+                                    <label for="domaine1">Domaine</label>
+                                </div>
+                                
+                                <div class="form-floating my-4">
+                                    <input type="text" name="nom_f1" id="nom_f"class="form-control" placeholder="Nom du fondateur">
+                                    <span id="3"></span>
+                                    <label for="nom_f1">Nom du fondateur</label>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                <input type="text" name="prenom_f1" id="prenom_f"class="form-control" placeholder="Prenom du fondateur">
+                                <span id="4"></span>
+                                    <label for="prenom_f1">Prenom du fondateur</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                <textarea id="description" name="description1" class="form-control" placeholder="description"style="height: 120px"></textarea>
+                                <span id="5"></span>
+                                <label for="description1">Description de votre startup</label>
+                                </div>
+                                <div class="form-floating my-4">
+                                    <input type="text" name="email1" id="email"class="form-control" placeholder="Email">
+                                    <span id="6"></span>
+                                    <label for="email1">Email</label>
+                                </div>
+                                <div class="form-floating my-4">
+                                    <input type="text" name="tel1" id="tel"class="form-control" placeholder="Numéro téléphone">
+                                    <span id="7"></span>
+                                    <label for="tel1">Numéro téléphone</label>
+                                </div>
+                                <div class="col-lg-5 col-6">
+    <button type="submit" class="form-control">Enregistrer</button>
+
+    </div>
+                            </div>
+                            </form>
                             </div>
                         </div>
 
@@ -159,7 +190,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">I </a>need</h4>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a> need</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2023 <strong>I need</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">I need</a></p>
@@ -209,40 +240,3 @@ https://www.tooplate.com/view/2127-little-fashion
         <script src="js/custom.js"></script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -11,7 +11,7 @@
             $projet=new projets(NULL,$_POST["id_startup"],$_POST["Nom_projet"],
             $_POST["Description_projet"],$_POST["Date_Debut"],$_POST["Date_Fin"],$_POST["Statut_Projet"]);
             $projetC->addprojets($projet);
-            header("Location:liste2.php");
+            header("Location:VotreStartup.php");
         }
     }
     ?>
@@ -91,11 +91,7 @@ https://www.tooplate.com/view/2127-little-fashion
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="userstartup.php">Startup</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" href="userprojets.php">Projets</a>
+                                <a class="nav-link active" href="userstartup.php">Startup</a>
                             </li>
                         </ul>
 

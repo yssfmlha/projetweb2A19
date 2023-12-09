@@ -12,6 +12,17 @@ class startupC{
             die("erreur".$e->getMessage());                
         }
     }
+    public function getLatestStartup()
+    {
+        $sql = "SELECT * FROM startup2 ORDER BY id_startup DESC LIMIT 1";
+        $db = config::getConnexion();
+        try {
+            $query = $db->query($sql);
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die("erreur" . $e->getMessage());
+        }
+    }
     public function deletestartup($id){
         $sql="DELETE FROM startup2 WHERE id_startup=:id";
         $db=config::getConnexion();

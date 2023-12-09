@@ -10,7 +10,7 @@
             $startup=new startup(NULL,$_POST["Nom1"],$_POST["domaine1"],
             $_POST["nom_f1"],$_POST["prenom_f1"],$_POST["description1"],$_POST["email1"],$_POST["tel1"]);
             $startupC->addstartup($startup);
-            header("Location:liste.php");
+            header("Location:VotreStartup.php");
             
         }
     }
@@ -92,10 +92,6 @@ https://www.tooplate.com/view/2127-little-fashion
 
                             <li class="nav-item">
                                 <a class="nav-link active" href="userstartup.php">Startup</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="userprojets.php">Projets</a>
                             </li>
                         </ul>
 
