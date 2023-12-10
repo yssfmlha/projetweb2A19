@@ -1,0 +1,38 @@
+{
+    "2": {
+        "id_startup": 2,
+        "Nom": null,
+        "projets": [
+            {
+                "id_projet": 1,
+                "Nom_projet": "54",
+                "Description_Projet": "454",
+                "Date_Debut": "2023-11-23",
+                "Date_Fin": "2023-11-01",
+                "Statut_Projet": "ghfh"
+            },
+            {
+                "id_projet": 2,
+                "Nom_projet": "fsfsf",
+                "Description_Projet": "gfdgd",
+                "Date_Debut": "2024-01-12",
+                "Date_Fin": "2024-01-24",
+                "Statut_Projet": "fdfds"
+            }
+        ]
+    },
+    "1": {
+        "id_startup": 1,
+        "Nom": null,
+        "projets": [
+            {
+                "id_projet": 7,
+                "Nom_projet": "object string",
+                "Description_Projet": "fdgdfgdfggfdg",
+                "Date_Debut": "2024-02-08",
+                "Date_Fin": "2024-05-03",
+                "Statut_Projet": "en attende"
+            }
+        ]
+    }
+}
