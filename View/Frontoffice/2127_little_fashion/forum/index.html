@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+    <main>
+        <section class="container">
+            <form id="postForm">
+                <input type="text" name="author" placeholder="Author" required>
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="content" placeholder="Content" required></textarea>
+                <button type="submit">Add Post</button>
+            </form>
+            
+            <div id="postsList"></div>
+        </section>
+        <aside id="editFormContainer"></aside>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>

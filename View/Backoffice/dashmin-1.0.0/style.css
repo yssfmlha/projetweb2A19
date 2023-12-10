@@ -1,0 +1,73 @@
+form
+{
+    width: 90%;
+    max-width: 600px;
+}
+.input-groupe{
+    margin-bottom: 30px;
+    position: relative;
+
+}
+input{
+    width: 100%;
+    padding: 10px;
+    outline:0;
+    border:1px solid black;
+    color:black;
+    background: transparent;
+    font-size: 15px;
+
+}
+textarea{
+     width: 100%;
+    padding: 10px;
+    outline:0;
+    border:1px solid black;
+    color:black;
+    background: transparent;
+    font-size: 15px;
+}
+label
+{
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    padding:10px;
+    color: black;
+    cursor: text;
+    transition: 0.2s;
+}
+button{
+    padding: 10px;
+    color:black;
+    outline: none;
+    background: transparent;
+    border: 1px solid black;
+    width:100%;
+    cursor: pointer;
+}
+input:focus~label,
+input:valid~label,
+textarea:focus~label,
+textarea:valid~label{
+    top: -35px;
+    font-size: 14px;
+
+}
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.row.input-groupe{
+    flex-basis: 48%;
+}
+.row2{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.row2.input-groupe{
+    flex-basis: 48%;
+}
