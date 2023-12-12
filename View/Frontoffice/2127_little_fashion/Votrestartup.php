@@ -68,7 +68,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>I</span>need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -101,14 +101,14 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
                             <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -120,8 +120,8 @@ https://www.tooplate.com/view/2127-little-fashion
 
                         <div class="col-lg-10 col-12 header-info">
                             <h1>
-                                <span class="d-block text-primary">Votre</span>
-                                <span class="d-block text-dark">startup et projets</span>
+                                <span class="d-block text-primary">Your Startups</span>
+                                <span class="d-block text-dark">and Projects</span>
                             </h1>
                         </div>
                     </div>
@@ -135,18 +135,18 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="row">
                         
                         <div class="col-lg-6 col-12">
-                            <h5><center>Votre Startup</center></h5>
+                            <h5><center>Your startup</center></h5>
 <table border="2" align="center" width = "70%" >
     <tr>
-    <th>id_startup</th>
-    <th>Nom_startup</th>
-    <th>Domaine</th>
-    <th>Nom_fondateur</th>
-    <th>Prénom_fondateur</th>
+    <th>Startup Id</th>
+    <th>Startup name</th>
+    <th>Domain</th>
+    <th>Founder name</th>
+    <th>Founder last name</th>
     <th>Description</th>
     <th>Email</th>
-    <th>telephone</th>
-    <th>Update </th>
+    <th>Phone number</th>
+    <th>Update</th>
     </tr>
     <?php if ($latestStartup) : ?>
                                 <tr>
@@ -162,18 +162,18 @@ https://www.tooplate.com/view/2127-little-fashion
                                 </tr>
                             <?php endif; ?>
 </table>
-<h5><center>Vos projets</center></h5>
+<h5><center>Your projects</center></h5>
 <table border="2" align="center" width = "70%">
 <tr>
-            <th>identifiant projet</th>
-            <th>identifiant startup</th>
-            <th>Nom du projet</th>
-            <th>Description du projet</th>
-            <th>Date de debut</th>
-            <th>Date de fin</th>
-            <th>Statut du projet</th>
-            <th>Mise à jour</th>
-            <th>Supprimer</th>
+            <th>Project Id</th>
+            <th>Startup Id</th>
+            <th>Project name</th>
+            <th>Project Description</th>
+            <th>Begin Date</th>
+            <th>End Date</th>
+            <th>Project status</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         <?php if (!empty($projects)) : ?>
             <?php foreach ($projects as $project) : ?>
@@ -185,7 +185,7 @@ https://www.tooplate.com/view/2127-little-fashion
             <td><?php echo $project["Date_Debut"];?></td>
             <td><?php echo $project["Date_Fin"];?></td>
             <td><?php echo $project["Statut_Projet"];?></td>
-            <td><a href = "updateprojets.php?idd=<?php echo $project["id_projet"];?>&nom=<?php echo($project["Nom_projet"]);?>&desc=<?php echo($project["Description_Projet"]);?>&dated=<?php echo($project["Date_Debut"]);?>&datef=<?php echo($project["Date_Fin"]);?>&stat=<?php echo($project["Statut_Projet"]);?>">Update</a></td>
+            <td><a href = "updateprojets.php?ids=<?php echo $latestStartup[0]["id_startup"];?>&idd=<?php echo $project["id_projet"];?>&nom=<?php echo($project["Nom_projet"]);?>&desc=<?php echo($project["Description_Projet"]);?>&dated=<?php echo($project["Date_Debut"]);?>&datef=<?php echo($project["Date_Fin"]);?>&stat=<?php echo($project["Statut_Projet"]);?>">Update</a></td>
             <td><a href = "deleteprojets.php?idd=<?php echo $project["id_projet"];?>">Delete</a></td>
             </tr>
     <?php endforeach;?>

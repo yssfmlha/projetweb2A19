@@ -86,7 +86,7 @@
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link active" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
@@ -159,8 +159,6 @@
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">Privacy policy</a></li>
 
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">FAQs</a></li>
-
-                            <li class="footer-menu-item"><a href="#" class="footer-menu-link">Donation</a></li>
                         </ul>
                     </div>
 

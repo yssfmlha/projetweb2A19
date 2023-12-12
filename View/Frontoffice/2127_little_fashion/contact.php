@@ -88,14 +88,14 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
                             <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>

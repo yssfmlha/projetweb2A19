@@ -34,7 +34,6 @@ $user=$userc->listuser($_SESSION["user_id"]);
         <link rel="stylesheet" href="css/slick.css"/>
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
-        
 <!--
 
 Tooplate 2127 Little Fashion
@@ -61,7 +60,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>i</span>need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -71,7 +70,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
+                        <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="../index.html">Home</a>
                             </li>
@@ -99,9 +98,9 @@ https://www.tooplate.com/view/2127-little-fashion
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="../2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="../Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -113,8 +112,8 @@ https://www.tooplate.com/view/2127-little-fashion
 
                         <div class="col-lg-6 col-12 header-info">
                             <h1>
-                                <span class="d-block text-primary">Company</span>
-                                <span class="d-block text-dark">Fashion</span>
+                                <span class="d-block text-primary">Chat with</span>
+                                <span class="d-block text-dark">Other people</span>
                             </h1>
                         </div>
                     </div>
@@ -146,7 +145,7 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
     <form method="GET" action="">
         <input type="text" name="search" placeholder="Search by title or author" oninput="censorInput(this)">
-        <button type="submit">Search</button>
+        <button type="submit" style="background-color:#F36A16;">Search</button>
     </form>
     <form method="GET" action="">
       <label for="sort">Sort By:</label>
@@ -155,14 +154,14 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
         <option value="likes">Likes</option>
         <option value="dislikes">Dislikes</option>
      </select>
-     <button type="submit">Sort</button>
+     <button type="submit" style="background-color:#F36A16;">Sort</button>
     </form>
     <form id="postForm" method="POST" action="add_post.php">
    <?php echo "<input type='hidden' name='author'  value=' " . $user[0]["name"] . "' oninput='censorInput(this)'><br>" ?>
    <?php echo "<input type='hidden' name='author_id' value='" . $_SESSION["user_id"] . "'>" ?>
         <input type="text" name="title" placeholder="Title" oninput="censorInput(this)" required><br>
         <textarea name="content" placeholder="Content" oninput="censorInput(this)" required></textarea><br>
-        <button type="submit">Add Post</button>
+        <button type="submit" style="background-color:#F36A16;">Add Post</button>
     </form>
 
     <div class="container">
@@ -212,12 +211,12 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
                 echo "<form method='POST' action='like_post.php'>";
                 echo "<input type='hidden' name='post_id' value='{$post['id']}'>";
                 echo "<input type='hidden' name='user_id' value='" . $_SESSION["user_id"] . "'>";
-                echo "<button type='submit' name='like'>Like</button>";
+                echo "<button type='submit' name='like' style='background-color:#F36A16;'>Like</button>";
                 echo "</form>";
                 echo "<form method='POST' action='dislike_post.php'>";
                 echo "<input type='hidden' name='post_id' value='{$post['id']}'>";
                 echo "<input type='hidden' name='author_id' value='" . $_SESSION["user_id"] . "'>"; 
-                echo "<button type='submit' name='dislike'>Dislike</button>";
+                echo "<button type='submit' name='dislike' style='background-color:#F36A16;'>Dislike</button>";
                  echo "</form>";
                 echo "Likes: " . $post['likes']; 
                 echo "    Dislikes: " . $post['dislikes']; 
@@ -230,12 +229,12 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($_SESSION["user_id"] == $post['author_id']) {
                     echo "<form action='edit.php' method='GET'>";
                     echo "<input type='hidden' name='id' value='{$post['id']}'>";
-                    echo "<button type='submit'>Edit</button>";
+                    echo "<button type='submit' style='background-color:#F36A16;'>Edit</button>";
                     echo "</form>";
             
                     echo "<form action='delete_post.php' method='GET'>";
                     echo "<input type='hidden' name='delete_id' value='{$post['id']}'>";
-                    echo "<button type='submit'>Delete</button>";
+                    echo "<button type='submit' style='background-color:#F36A16;'>Delete</button>";
                     echo "</form>";
                 }
                 echo "</div>";
@@ -246,7 +245,7 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
                   echo "<input type='hidden' name='post_id' value='{$post['id']}'>";
                   echo "<input type='hidden' name='author' value='" . $user[0]["name"] . "' oninput='censorInput(this)'><br>";
                   echo "<textarea name='comment_text' placeholder='Your comment' oninput='censorInput(this)' required></textarea><br>";
-                  echo "<button type='submit'>Add Comment</button>";
+                  echo "<button type='submit' style='background-color:#F36A16;'>Add Comment</button>";
                   echo "</form>";
                   echo "</div>";
         
@@ -268,12 +267,12 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
                         if ($_SESSION["user_id"] == $comment['author_id']) {
                             echo "<form action='edit_comment.php' method='GET'>";
                             echo "<input type='hidden' name='comment_id' value='{$comment['id']}'>";
-                            echo "<button type='submit'>Edit Comment</button>";
+                            echo "<button type='submit' style='background-color:#F36A16;'>Edit Comment</button>";
                             echo "</form>";
                 
                             echo "<form action='delete_comment.php' method='GET'>";
                             echo "<input type='hidden' name='comment_id' value='{$comment['id']}'>";
-                            echo "<button type='submit'>Delete Comment</button>";
+                            echo "<button type='submit' style='background-color:#F36A16;'>Delete Comment</button>";
                             echo "</form>";
                         }
                         echo "</div>";
@@ -297,7 +296,7 @@ $randomUser = $stmt->fetch(PDO::FETCH_ASSOC);
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a>Need</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>

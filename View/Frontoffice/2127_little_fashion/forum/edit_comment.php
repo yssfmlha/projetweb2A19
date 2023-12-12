@@ -49,7 +49,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>Little</span> Fashion</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -61,30 +61,35 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" href="../index.html">Home</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="about.html">Story</a>
+                                <a class="nav-link" href="../Produit/home.php">Products</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Products</a>
+                                <a class="nav-link" href="../products.php">Charities</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="faq.html">FAQs</a>
+                                <a class="nav-link" href="../Votrestartup.php">Startup</a>
                             </li>
-
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="../Events/myindex.php">Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php">Forum</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="position:relative;left:200px;" href="../affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="../2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="../Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -96,8 +101,8 @@ https://www.tooplate.com/view/2127-little-fashion
 
                         <div class="col-lg-6 col-12 header-info">
                             <h1>
-                                <span class="d-block text-primary">Company</span>
-                                <span class="d-block text-dark">Fashion</span>
+                                <span class="d-block text-primary">Chat with</span>
+                                <span class="d-block text-dark">Other people</span>
                             </h1>
                         </div>
                     </div>
@@ -129,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['comment_id'])) {
         <input type="hidden" name="comment_id" value="<?php echo $comment['id']; ?>">
         <input type="text" name="author" placeholder="Your Name" value="<?php echo $comment['author']; ?>" oninput="censorInput(this)"  required><br>
         <textarea name="comment_text" placeholder="Your comment" oninput="censorInput(this)"  required><?php echo $comment['comment_text']; ?></textarea><br>
-        <button type="submit">Update Comment</button>
+        <button type="submit" style='background-color:#F36A16;'>Update Comment</button>
         <a href="index.php">Cancel</a>
     </form>
 </div>
@@ -155,7 +160,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['comment_id'])) {
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a>Need</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>

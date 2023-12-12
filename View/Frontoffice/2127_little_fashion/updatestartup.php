@@ -68,7 +68,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>I</span>need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -101,13 +101,13 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -134,37 +134,37 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="row">
                         
                         <div class="col-lg-6 col-12">
-                            <h2 class="mb-4">Let's <span>begin</span></h2>
+                            <h2 class="mb-4">Update <span>Your Startup</span></h2>
 
                             <form class="contact-form me-lg-5 pe-lg-3" role="form" method="POST" onsubmit="return ISR();">
 
                                 <div class="form-floating">
-                                    <input type="text" name="Nom1" id="Nom" class="form-control" placeholder="Nom du startup" value="<?php echo $_GET["nom"]; ?>">
+                                    <input type="text" name="Nom1" id="Nom" class="form-control" placeholder="Startup name" value="<?php echo $_GET["nom"]; ?>">
                                     <span id="1"></span>
-                                    <label for="Nom1">Nom startup</label>
+                                    <label for="Nom1">Startup name</label>
                                 </div>
 
                                 <div class="form-floating my-4">
-                                    <input type="text" name="domaine1" id="domaine"class="form-control" placeholder="Domaine" value="<?php echo $_GET["domaine"]; ?>">
+                                    <input type="text" name="domaine1" id="domaine"class="form-control" placeholder="Domain" value="<?php echo $_GET["domaine"]; ?>">
                                     <span id="2"></span>
-                                    <label for="domaine1">Domaine</label>
+                                    <label for="domaine1">Domain</label>
                                 </div>
                                 
                                 <div class="form-floating my-4">
-                                    <input type="text" name="nom_f1" id="nom_f"class="form-control" placeholder="Nom du fondateur" value="<?php echo $_GET["nomf"]; ?>">
+                                    <input type="text" name="nom_f1" id="nom_f"class="form-control" placeholder="Founder's firstname" value="<?php echo $_GET["nomf"]; ?>">
                                     <span id="3"></span>
-                                    <label for="nom_f1">Nom du fondateur</label>
+                                    <label for="nom_f1">Founder's firstname</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
-                                <input type="text" name="prenom_f1" id="prenom_f"class="form-control" placeholder="Prenom du fondateur" value="<?php echo $_GET["prenom"]; ?>">
+                                <input type="text" name="prenom_f1" id="prenom_f"class="form-control" placeholder="Founder's lastname" value="<?php echo $_GET["prenom"]; ?>">
                                 <span id="4"></span>
-                                    <label for="prenom_f1">Prenom du fondateur</label>
+                                    <label for="prenom_f1">Founder's lastname</label>
                                 </div>
                                 <div class="form-floating mb-4">
-                                <textarea id="description" name="description1" class="form-control" placeholder="description"style="height: 120px"><?php echo $_GET["de"]; ?></textarea>
+                                <textarea id="description" name="description1" class="form-control" placeholder="Startup description"style="height: 120px"><?php echo $_GET["de"]; ?></textarea>
                                 <span id="5"></span>
-                                <label for="description1">Description de votre startup</label>
+                                <label for="description1">Startup description</label>
                                 </div>
                                 <div class="form-floating my-4">
                                     <input type="text" name="email1" id="email"class="form-control" placeholder="Email" value="<?php echo $_GET["email"]; ?>">
@@ -172,12 +172,12 @@ https://www.tooplate.com/view/2127-little-fashion
                                     <label for="email1">Email</label>
                                 </div>
                                 <div class="form-floating my-4">
-                                    <input type="text" name="tel1" id="tel"class="form-control" placeholder="Numéro téléphone" value="<?php echo $_GET["tel"]; ?>">
+                                    <input type="text" name="tel1" id="tel"class="form-control" placeholder="Phone number" value="<?php echo $_GET["tel"]; ?>">
                                     <span id="7"></span>
-                                    <label for="tel1">Numéro téléphone</label>
+                                    <label for="tel1">Phone number</label>
                                 </div>
                                 <div class="col-lg-5 col-6">
-    <button type="submit" class="form-control">Enregistrer</button>
+    <button type="submit" class="form-control">Save</button>
 
     </div>
                             </div>

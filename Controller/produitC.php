@@ -1,6 +1,6 @@
 <?php
 
-require 'c:\xampp\htdocs\projet_web\config.php';
+require_once 'c:\xampp\htdocs\projet_web\config.php';
 
 class produitC
 {

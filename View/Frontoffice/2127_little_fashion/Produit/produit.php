@@ -66,7 +66,7 @@ $tab = $c->listproduit();
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>I</span> Need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -99,14 +99,14 @@ $tab = $c->listproduit();
                                 <a class="nav-link" href="../forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="../affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="../affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="../2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -118,8 +118,8 @@ $tab = $c->listproduit();
 
                         <div class="col-lg-10 col-12">
                             <h1>
-                                <span class="d-block text-primary">pour chaque produit vendu</span>
-                                <span class="d-block text-dark">5 % vont aux personnes dans le besoin</span>
+                                <span class="d-block text-primary">For each product sold</span>
+                                <span class="d-block text-dark">5 % will go to people in need</span>
                             </h1>
                         </div>
                     </div>
@@ -145,7 +145,7 @@ $tab = array(
     array(
         'categorie_ref' => 34,
         'id_produit' => 49,
-        'nom_produit' => 'kabout xD',
+        'nom_produit' => 'kabout',
         'prix_produit' => 56,
         'image_url' => 'img/kabout.png'
 
@@ -182,7 +182,7 @@ $tab = array(
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="mb-5">Produits</h2>
+                <h2 class="mb-5">Products</h2>
             </div>
 
             <?php foreach ($tab as $produit) { 
@@ -196,7 +196,7 @@ $tab = array(
                             <div class="product-info d-flex">
                                 <div>
                                     <h5 class="product-title mb-0"><?php echo $produit['nom_produit']; ?></h5>
-                                    <p class="product-price"><?php echo $produit['prix_produit']; ?></p>
+                                    <p class="product-price"><?php echo $produit['prix_produit']; ?>DT</p>
                                     <!-- Add a button to add the product to the cart -->
                                     <button class="add-to-cart-button" onclick="addToCart(<?php echo $produit['prix_produit']; ?>)">Add to Cart</button>
                                 </div>

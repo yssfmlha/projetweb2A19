@@ -80,7 +80,7 @@ $tab = $c->listcategorie();
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>i</span>Need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -120,7 +120,7 @@ $tab = $c->listcategorie();
                         <div class="d-none d-lg-block">
                             <a href="../2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -132,8 +132,8 @@ $tab = $c->listcategorie();
 
                         <div class="col-lg-10 col-12">
                             <h1>
-                                <span class="d-block text-primary">pour chaque produit vendu</span>
-                                <span class="d-block text-dark">5 % vont aux personnes dans le besoin</span>
+                                <span class="d-block text-primary">For each product sold</span>
+                                <span class="d-block text-dark">5 % will go to people in need</span>
                             </h1>
                         </div>
                     </div>

@@ -67,7 +67,7 @@ https://www.tooplate.com/view/2127-little-fashion
                     </button>
 
                     <a class="navbar-brand" href="index.html">
-                        <strong><span>I</span> need</strong>
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -100,14 +100,14 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -134,45 +134,41 @@ https://www.tooplate.com/view/2127-little-fashion
                     <div class="row">
                         
                         <div class="col-lg-6 col-12">
-                            <h2 class="mb-4">Let's <span>begin</span></h2>
+                            <h2 class="mb-4">Add <span>Project</span></h2>
 
                             <form class="contact-form me-lg-5 pe-lg-3" role="form" onsubmit="return GAB();" method="POST">
 
-                                <div class="form-floating">
-                                <span id="0"></span>
-                                <label for="id_startup">Nom du startup</label>
-                                </div>
 
                                 <div class="form-floating my-4">
-                                    <input type="text" name="Nom_projet" id="Nom_projet" class="form-control" placeholder="Nom_projet">
+                                    <input type="text" name="Nom_projet" id="Nom_projet" class="form-control" placeholder="Project Name">
                                     <span id="1"></span>
-                                    <label for="Nom_projet">Nom du projet</label>
+                                    <label for="Nom_projet">Project Name</label>
                                 </div>
                                 
                                 <div class="form-floating my-4">
                                     <textarea type="text" name="Description_projet" id="Description_projet"class="form-control" placeholder="Description_projet" style="height: 120px"></textarea>
                                     <span id="2"></span>
-                                    <label for="Description_projet">Description du projet</label>
+                                    <label for="Description_projet">Project description</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
                                 <input type="date" name="Date_Debut" id="Date_Debut"class="form-control" placeholder="Date_Debut">
                                 <span id="3"></span>
-                                    <label for="Date_Debut">Date debut du projet</label>
+                                    <label for="Date_Debut">Project start date</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
                                 <input type="date" name="Date_Fin" id="Date_fin" class="form-control" placeholder="Date_Fin">
                                 <span id="4"></span>
-                                    <label for="Date_Fin">Date fin du projet</label>
+                                    <label for="Date_Fin">Project end date</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                 <input type="text" name="Statut_Projet" id="Statut_Projet"class="form-control" placeholder="Statut_Projet">
                                 <span id="5"></span>
-                                    <label for="Statut_Projet">Statut du projet</label>
+                                    <label for="Statut_Projet">Project status</label>
                                 </div>
                                 <div class="col-lg-5 col-6">
-                                    <button type="submit" class="form-control">Enregistrer</button>
+                                    <button type="submit" class="form-control">Add Project</button>
                                 </div>
                             </form>
                         </div>

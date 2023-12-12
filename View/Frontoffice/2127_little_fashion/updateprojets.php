@@ -2,13 +2,13 @@
     include '../../../Controller/projetsC.php';
     include "../../../Model/projets.php";
     $projetC=new projetsC();
-    if(isset($_POST["id_startup"])&&isset($_POST["Nom_projet"])&&isset($_POST["Description_projet"])&&isset($_POST["Date_Debut"]) 
+    if(isset($_GET["ids"])&&isset($_POST["Nom_projet"])&&isset($_POST["Description_projet"])&&isset($_POST["Date_Debut"]) 
     &&isset($_POST["Date_Fin"])
     &&isset($_POST["Statut_Projet"])){
         
-        if(!empty($_POST["id_startup"])&&!empty($_POST["Nom_projet"])&&!empty($_POST["Description_projet"])&&!empty($_POST["Date_Debut"])
+        if(!empty($_GET["ids"])&&!empty($_POST["Nom_projet"])&&!empty($_POST["Description_projet"])&&!empty($_POST["Date_Debut"])
         &&!empty($_POST["Date_Fin"]) &&!empty($_POST["Statut_Projet"])){
-            $projet=new projets(NULL,$_POST["id_startup"],$_POST["Nom_projet"],
+            $projet=new projets(NULL,$_GET["ids"],$_POST["Nom_projet"],
             $_POST["Description_projet"],$_POST["Date_Debut"],$_POST["Date_Fin"],$_POST["Statut_Projet"]);
             $projetC->updateprojets($projet,$_GET["idd"]);
             header("Location:VotreStartup.php");
@@ -105,9 +105,9 @@ https://www.tooplate.com/view/2127-little-fashion
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+                            <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -138,50 +138,37 @@ https://www.tooplate.com/view/2127-little-fashion
 
                             <form class="contact-form me-lg-5 pe-lg-3" role="form" onsubmit="return GAB();" method="POST">
 
-                                <div class="form-floating">
-                                <select name="id_startup" id="id_startup" class="form-control">
-                                <?php
-                                $projetC = new projetsC();
-                                $startupOptions = $projetC->getStartupOptions();
-                                foreach ($startupOptions as $startup) {
-                                    echo "<option value='" . $startup["id_startup"] . "'>" . $startup["Nom"] . " (ID: " . $startup["id_startup"] . ")</option>";
-                                }
-                                ?>
-                                </select>
-                                <span id="0"></span>
-                                <label for="id_startup">Nom du startup</label>
-                                </div>
 
                                 <div class="form-floating my-4">
                                     <input type="text" name="Nom_projet" id="Nom_projet" class="form-control" placeholder="Nom_projet" value="<?php echo($_GET["nom"]);?>">
                                     <span id="1"></span>
-                                    <label for="Nom_projet">Nom du projet</label>
+                                    <label for="Nom_projet">Project Name</label>
                                 </div>
                                 
                                 <div class="form-floating my-4">
                                     <textarea type="text" name="Description_projet" id="Description_projet"class="form-control" placeholder="Description_projet" style="height: 120px"><?php echo($_GET["desc"]);?></textarea>
                                     <span id="2"></span>
-                                    <label for="Description_projet">Description du projet</label>
+                                    <label for="Description_projet">Project description</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
                                 <input type="date" name="Date_Debut" id="Date_Debut"class="form-control" placeholder="Date_Debut" value="<?php echo($_GET["dated"]);?>">
                                 <span id="3"></span>
-                                    <label for="Date_Debut">Date debut du projet</label>
+                                    <label for="Date_Debut">Project start date</label>
                                 </div>
 
                                 <div class="form-floating mb-4">
                                 <input type="date" name="Date_Fin" id="Date_fin" class="form-control" placeholder="Date_Fin" value="<?php echo($_GET["datef"]);?>">
                                 <span id="4"></span>
-                                    <label for="Date_Fin">Date fin du projet</label>
+                                    <label for="Date_Fin">Project end date</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                 <input type="text" name="Statut_Projet" id="Statut_Projet"class="form-control" placeholder="Statut_Projet" value="<?php echo($_GET["stat"]);?>">
                                 <span id="5"></span>
-                                    <label for="Statut_Projet">Statut du projet</label>
+                                    <label for="Statut_Projet">Project status</label>
                                 </div>
                                 <div class="col-lg-5 col-6">
-                                    <button type="submit" class="form-control">Enregistrer</button>
+                                    <button type="submit" class="form-control">Save</button>
                                 </div>
                             </form>
                         </div>

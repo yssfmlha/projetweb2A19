@@ -72,8 +72,8 @@ $tab = $c->listEvents();
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <a class="navbar-brand" href="myindex.php">
-                        <strong><span>Little</span> Fashion</strong>
+                    <a class="navbar-brand" href="index.html">
+                        <strong>i<span>Need</span></strong>
                     </a>
 
                     <div class="d-lg-none">
@@ -85,30 +85,36 @@ $tab = $c->listEvents();
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" href="../index.html">Home</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">Story</a>
+                                <a class="nav-link" href="../Produit/home.php">Products</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="products.html">Products</a>
+                                <a class="nav-link" href="../products.php">Charities</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="faq.html">FAQs</a>
+                                <a class="nav-link" href="../Votrestartup.php">Startup</a>
                             </li>
-
                             <li class="nav-item">
                                 <a class="nav-link active" href="myindex.php">Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../forum/index.php">Forum</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="position:relative;left:190px;" href="../affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
-                            <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
-                        <a href="panier-event.php" class="bi-bag custom-icon"></a>
-                </div>
+                            <a href="../2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
+
+                            <a href="panier-event.php" class="bi-bag custom-icon"></a>
+                        </div>
             </div>
         </div>
     </nav>

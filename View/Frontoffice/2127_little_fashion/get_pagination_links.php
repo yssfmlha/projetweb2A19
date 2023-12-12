@@ -7,6 +7,6 @@ $totalPages = ceil(count($charite) / $pageSize);
 
 // Output pagination links
 for ($page = 1; $page <= $totalPages; $page++) {
-    echo "<a href='#' onclick='loadPage($page)'>Page $page</a> ";
+    echo "<a href='#' onclick='loadPage($page)'><button class='form-control butt'>Page $page</button></a><br> ";
 }
 ?>

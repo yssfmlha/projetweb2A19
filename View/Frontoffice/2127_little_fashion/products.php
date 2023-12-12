@@ -22,6 +22,12 @@
         <link rel="stylesheet" href="css/slick.css"/>
 
         <link href="css/tooplate-little-fashion.css" rel="stylesheet">
+        <style>
+            .butt:hover{
+                transition:0.5s;
+                background-color:#F36A16;
+            }
+        </style>
 <!--
 
 Tooplate 2127 Little Fashion
@@ -81,14 +87,14 @@ https://www.tooplate.com/view/2127-little-fashion
                                 <a class="nav-link" href="forum/index.php">Forum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" style="position:relative;left:220px;" href="affichage.php">Your Donations</a>
+                                <a class="nav-link" style="position:relative;left:200px;" href="affichage.php">Your Donations</a>
                             </li>
                         </ul>
 
                         <div class="d-none d-lg-block">
                             <a href="2127_little_fashion/login.php" class="bi-person custom-icon me-3"></a>
 
-                            <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                            <a href="Produit/home.php" class="bi-bag custom-icon"></a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +132,7 @@ https://www.tooplate.com/view/2127-little-fashion
                 <div class="row">
 
                     <div class="col-lg-3 col-10 me-auto mb-4">
-                        <h4 class="text-white mb-3"><a href="index.html">Little</a> Fashion</h4>
+                        <h4 class="text-white mb-3"><a href="index.html">I</a> Need</h4>
                         <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2022 <strong>Little Fashion</strong></p>
                         <br>
                         <p class="copyright-text">Designed by <a href="https://www.tooplate.com/" target="_blank">Tooplate</a></p>
